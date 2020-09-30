@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="google-site-verification" content="EN4F_NZB7rOXAxpLulMjD2Z1KNZsJofAgY_VFCv-_7U" />
+    <meta property="og:title" content="DEFENSE MECHANISM" />
+    <meta property="og:type" content="website" />
+    <meta property="fb:app_id" content="378543469570238" />
+    <meta property="og:url" content="https://defensemech.com" />
+    <meta property="og:description" content="Intense Tech with Defense Mech - LSDj Technique" />
+    <meta property="og:image" content="https://defensemech.com/dm.png" />
+    <base target="_blank" />
+    <link rel="shortcut icon" type="image/x-icon" href="https://defensemech.com/favicon.png" />
+    <link href="main.css" rel="stylesheet" />
+    <title>
+      Intense Tech con Defense Mech - Analisis del Sintetizador del Canal Wave en LSDj Parte Dos
+    </title>
+  </head>
+  <body>
+    <h1 id="análisis-del-sintetizador-del-canal-wave-en-lsdj.-parte-dos">
+      Intense Tech con Defense Mech – Análisis del sintetizador del canal Wave en LSDj. Parte dos
+    </h1>
+    <p>
+      - Posted November 9th, 2018 by
+      <a href="https://apixelguy.com" title="Posts by Pixel Guy">Pixel Guy</a><br /><em
+        >Artículo Original de <a href="lsdj-wave-synth-deep-dive-part-2/">DEFENSE MECHANISM</a>.
+        Traducción al Español por <a href="https://apixelguy.com">Pixel Guy</a>.</em
+      >
+    </p>
+    <p>
+      Hola, soy Defense Mechanism, ¡bienvenidos de nueva cuenta a <em>Intense Tech</em>! Únanse a mí
+      a medida que exploramos a profundidad las funciones del LSDj con el fin de ayudarte a ti,
+      lector, a aumentar tu entendimiento del programa.
+    </p>
+    <p>
+      ¡En este tutorial continuaremos cubriendo lo que se necesita para entender el sintetizador del
+      canal Wave!
+      <a href="ganalisis-del-sintetizador-del-canal-wave-en-lsdj-parte-uno.html/">La vez pasada</a>
+      vimos los parámetros Signal, Volume, Filter, Cutoff y Q. En esta ocasión veremos
+      específicamente los parámetros de Dist, Phase, Vshift y Limit. ¡Te mostraré cómo añadir un
+      poco de esa cualidad crujiente característica del Noise a tus sonidos del canal Wave! Al
+      terminar deberías de tener una idea vasta de cómo conseguir cualquier tipo de sonido en el
+      canal Wave, desde un <em>lead</em> suave y sedoso, hasta un bajo enigmático y crujiente.
+    </p>
+    <hr />
+    <p>
+      En la
+      <a href="analisis-del-sintetizador-del-canal-wave-en-lsdj-parte-uno.html">primera parte</a>
+      hablé sobre cómo usar diferentes configuraciones en el filtro afecta a los armónicos que se
+      producen en el canal Wave. Cómo ya hemos visto, entre más ciclos tenga una forma de onda en el
+      cuadro de onda (pantalla WAVE), más agudo será el armónico que se produzca. De hecho, el
+      número de ciclos corresponde al número de armónicos que se reproducirán.
+    </p>
+    <p>
+      Si has dado un vistazo a las configuraciones por tu cuenta o has leído el manual del LSDj; muy
+      probablemente te has encontrado con otra forma de cambiar el número de ciclos: cambiar el
+      valor de Phase.
+    </p>
+    <p>
+      El parámetro Phase en LSDj comprime la forma de la onda horizontalmente. Cuando el parámetro
+      está ajustado en Normal, incrementar el valor por encima de 0 comprimirá la onda por completo,
+      añadiendo <em>samples</em> con volumen de 0 al final. De esta forma se podría decir que es
+      igual a cambiar el <em>width</em> de una onda de pulso, alias
+      <a href="https://es.wikipedia.org/wiki/Ciclo_de_trabajo"><em>duty cycle</em></a
+      >. De hecho, una técnica común para conseguir <em>leads</em> de onda de pulso modulados
+      (usualmente asociados con el SID de la C64 por ejemplo) es ajustar Signal a Square, mantener
+      la configuración de Phase en Normal, poner el valor inicial de Phrase a 00 y el de final a 1F
+      (o 1E en la versión 4).
+    </p>
+    <p class="fig">
+      <img src="normal-phase.gif" /><br /><em>Lead SID con el parámetro de Phase en Normal.</em>
+    </p>
+    <p class="fig"><audio controls><source src="normal-phase.mp3" ></audio></p>
+    <p>
+      Para conseguir un <em>lead</em> que se asemeje a una voz, intenta esto con Signal ajustado a
+      Triangle en lugar de Square.
+    </p>
+    <p>
+      Si cambiamos el parámetro de Phase a Resync, solo nos estaremos dando otra forma de añadir
+      armónicos, una similar a cambiar el Cutoff de la onda. Lo que hace Resync es que, en lugar de
+      comprimir la forma de onda una vez y añadir <em>samples</em> con valor de 0 al final, repite
+      la forma de onda hasta que los 32 espacios para <em>samples</em> están llenos.
+    </p>
+    <p class="fig"><img src="resync-phase.gif" /></p>
+    <p class="fig">
+      <audio controls><source src="resync-phase.mp3" /></audio>
+    </p>
+    <p>
+      (Nota: en la versión 4 de LSDj, Phase 1F es usualmente silencio, por lo que este espacio
+      tendría que ser llenado manualmente).
+    </p>
+    <p>
+      También puedes experimentar con Resync2 que, como Resync, repite la forma de onda para llenar
+      el cuadro de onda, pero no la comprime. Esto normalmente tiene el efecto de bajar el volumen,
+      como cuando solo repites en bucle una parte de la forma de onda. Por lo general nunca llega
+      tan alto o tan bajo como bien podría hacerlo. Sin embargo, la pérdida de volumen complementa
+      armónicos adicionales compresos en la forma de onda.
+    </p>
+    <p class="fig"><img src="resync2-phase.gif" /></p>
+    <p class="fig">
+      <audio controls><source src="resync2-phase.mp3" /></audio>
+    </p>
+    <p>
+      Hasta ahora, los cambios en las formas de onda han resultado en un sonido bastante limpio. Los
+      armónicos tienen un sonido suave y claro, pero ¿y si realmente quisiéramos añadir un poco de
+      suciedad? Tendríamos que bajar y ensuciarnos un poco para transformar a nuestra onda senoidal
+      en algo como esto:
+    </p>
+    <p class="fig"><img src="nois1-1541522752.gif" /></p>
+    <p class="fig">
+      <audio controls><source src="nois1-1541522752.mp3" /></audio>
+    </p>
+    <p>
+      Ese último cuadro del sintetizador mostrado arriba es como se ve el Noise puro en el canal
+      Wave. Entre más difusa se ve la forma de onda, más armónicos son combinados de manera
+      diferente para añadir más suciedad. Aquí hay un ejemplo de cómo suenan 16 cuadros de Noise
+      puro.
+    </p>
+    <p class="fig"><img src="nois2-1541523664.gif" /></p>
+    <p class="fig">
+      <audio controls><source src="nois2-1541523664.mp3" /></audio>
+    </p>
+    <p>
+      Entonces, ¿cómo añadir todo esto a nuestras formas de onda? Una manera de hacerlo es, en
+      esencia, añadir algunos «puntos» extra. Estos se pueden agregar de forma manual, como al poner
+      un poco de polvo en una onda senoidal normal.
+    </p>
+    <p class="fig"><img src="sine-grit.gif" /></p>
+    <p class="fig">
+      <audio controls><source src="sine-grit2.mp3" /></audio>
+    </p>
+    <p>
+      El parámetro de Dist (Distorsión) también afecta el contenido de suciedad en la onda. El
+      término distorsión en LSDj se refiere a lo que pasa cuando la forma de onda sobrepasa el rango
+      dinámico disponible; en otras palabras, es lo que pasa cuando se incrementa el valor de Volume
+      o de Q de una forma de onda y se lleva por encima del volumen máximo. Como recordarás, el
+      volumen es representado por los valores de 0-F. Si el pico de volumen de la señal es superior
+      a F o inferior a 0, el parámetro Dist de la forma de onda determinará cómo reaccionará el
+      LSDj.
+    </p>
+    <p>
+      El parámetro por defecto de Dist, Clip, elige solo «recortar» los valores en 0 y F. Es como si
+      solo cortáramos la punta y el fondo. Entre más incrementemos el volumen de nuestra onda
+      senoidal, más comenzará a sonar como una onda cuadrada.
+    </p>
+    <p class="fig"><img src="clip.gif" /></p>
+    <p class="fig">
+      <audio controls><source src="clip.mp3" /></audio>
+    </p>
+    <p>
+      Recuerda que una onda cuadrada añade algunos armónicos un tanto extraños al sonido de una onda
+      senoidal, por lo que esta es una posibilidad.
+    </p>
+    <p>
+      La siguiente opción, Fold (la cual fue introducida en la versión 6), «refleja» lo que esos
+      parámetros de volumen podrían ser en la punta y en el fondo.
+    </p>
+    <p class="fig"><img src="fold.gif" /></p>
+    <p class="fig">
+      <audio controls><source src="fold.mp3" /></audio>
+    </p>
+    <p>
+      Ahora, en lugar de cortar esos componentes de nuestra onda senoidal que llegan a los límites
+      superior e inferior, los excedentes de volumen son reincorporados a la forma de onda
+      principal. Comparado con el corte profundo parecido a una onda cuadrada de la opción Clip,
+      este es mucho más agudo y resonante, con armónicos más altos. También tiene un volumen más
+      bajo, ya que hay menos <em>samples</em> al fondo del rango dinámico. Sin embargo, puedes
+      incrementar el valor de Volume o de Q y dejar que los <em>samples</em> se reincorporen varias
+      veces para un mayor efecto.
+    </p>
+    <p>
+      La última opción, Wrap, se encargará de cualquier sonido agudo que pase la punta y lo añadirá
+      al siguiente <em>sample</em> yendo de arriba hacia abajo y viceversa. Comparado con Clip y
+      Fold, este es caracterizado por la dureza y ruido reflejados en el sonido final. Tiende a
+      tener un volumen más alto que Fold, debido a que distribuye más samples de manera uniforme a
+      través de todo el rango dinámico, aunque su volumen no es tan alto como el de Clip.
+    </p>
+    <p class="fig"><img src="wrap.gif" /></p>
+    <p class="fig">
+      <audio controls><source src="wrap.mp3" /></audio>
+    </p>
+    <p>
+      Cuando se ajusta Dist en Wrap y se incrementa el volumen, muchos de los volúmenes de
+      <em>samples</em> son puestos de forma repetida, ya que se exceden los valores de 0-F muchas
+      veces. Esto crea varios escenarios donde los <em>samples</em> saltan a través de porciones
+      grandes en el rango dinámico. Cuando incrementas el valor de Volume o de Q puedes causar que
+      la forma de onda se mueva de forma impredecible; algo con lo que puede ser un tanto complicado
+      trabajar al momento de lidiar con un sonido preciso. Solo tienes que experimentar y escuchar
+      cómo diferentes armónicos le dan color al sonido, pero en general solo sonará duro, rico,
+      ruidoso y crujiente.
+    </p>
+    <p>Para recapitular, lo que hemos aprendido hasta el momento es:</p>
+    <ul>
+      <li>
+        Si tu forma de onda se ve como una onda senoidal, triangular o cuadrada con un ciclo
+        completo contenido enteramente en el cuadro de onda, su sonido será claro y suave. En
+        octavas bajas tendrá bajos abundantes.
+      </li>
+      <li>
+        Entre más repeticiones de ciclos de onda se tengan en el cuadro de onda, las frecuencias
+        producidas en los sonidos resultantes serán más altas. El número de repeticiones corresponde
+        al armónico de la nota en la serie armónica que será reproducido.
+      </li>
+      <li>
+        Entre más ruido se produzca dentro de cuadro de onda, menos claro será el sonido y el mismo
+        será dotado de más color en los armónicos superiores, dándole así un tono ruidoso y
+        resonante. En octavas bajas tendrá bajos menos enfatizados y un sonido más duro, crudo y
+        crujiente.
+      </li>
+      <li>
+        Las formas de añadir frecuencias más altas incluyen: poner «puntos» de manera manual en la
+        forma de onda; aumentar el valor de Cutoff e incrementar el valor de Q para dar énfasis;
+        cambiar el parámetro de Phase e incrementar los valores; añadir diferentes parámetros para
+        Dist al mismo tiempo que se aumentan los valores de Volume o de Q.
+      </li>
+    </ul>
+    <p>
+      Muy bien, así que, ¡tenemos una forma de onda muy ruidosa! ¿Ahora qué? Bueno, ¡tal vez es
+      DEMASIADO ruidosa! ¿Qué hay si nos gusta su sonido, pero queremos suavizarla un poco
+      manteniendo su carácter casi intacto?
+    </p>
+    <p>
+      ¡Me alegra que preguntes! Otra nueva función agregada en la versión 6 es el poder limitar
+      (Limit) el volumen DESPUÉS de que los  valores iniciales de Volume, Cutoff, Q y Phase son
+      aplicados. El valor aplicado a Limit restringe los <em>samples</em> a un rango de volumen, por
+      ejemplo: poner Limit a “F” permite los volúmenes de 0 a F, pero si lo ponemos a 5, solo
+      permitirá los volúmenes de 5 a A (diez en hexadecimal), por lo que los valores que se pudieran
+      alcanzar por debajo de 5 o por encima de A serían limitados a quedar dentro de ese rango de
+      acuerdo al parámetro de Dist que se esté manejando en ese momento.
+    </p>
+    <p>
+      Esto es una función realmente útil, porque, como ya hemos visto, es fácil alcanzar el nivel
+      máximo disponible en el rango dinámico de la pantalla WAVE, inclusive si nuestros valores de
+      volumen son bastante bajos. Adicionalmente, el Gameboy no nos ayuda mucho al solo permitir
+      cuatro volúmenes para el hardware en el canal Wave: 100 %, 50 %, 25 % y 0 % (<em>off</em>).
+      Cuando aplicamos Clip o Wrap a nuestras formas de onda y alcanzamos constantemente todo el
+      rango de volumen; yendo de 0 a F, el canal Wave desafortunadamente tiende a, en ocasiones, ser
+      demasiado ruidoso con un volumen de 100 % y demasiado silencioso a 25 % o 50 %.
+      Afortunadamente, ahora podemos elegir distorsionar nuestra forma de onda para conseguir un
+      poco de riqueza en el sonido con algunos armónicos añadidos, teniendo al mismo tiempo un
+      completo control del rango de volumen. Para ayudarnos aún más, ahora podemos elegir un rango
+      de volumen como punto de partida y otro como punto final. Esto nos permitirá hacer
+      transiciones más suaves entre volúmenes altos y bajos y viceversa; como se muestra a
+      continuación, con Limit iniciando en F y terminando en 4.
+    </p>
+    <p class="fig"><img src="limit.gif" /></p>
+    <p class="fig">
+      <audio controls><source src="limit.mp3" /></audio>
+    </p>
+    <p>
+      Para terminar tenemos la función de Vshift, o <em>Vertical shift</em>. Este parámetro nos
+      permitirá poner los <em>samples</em> de la forma de onda  de manera ascendente. En versiones
+      anteriores de LSDj, Vshift funcionaba de manera similar a la distorsión Wrap; ya que la forma
+      de onda se mueve de manera vertical y al alcanzar F se reincorpora de nuevo comenzando en 0.
+      Esto hace posible el poder elegir usar Dist con configuración Clip, aumentar el volumen y aún
+      así añadir un cambio de Vshift para introducir algunos sonidos más duros. De la misma manera
+      que Wrap, el incrementar Vshift, a menudo, resulta en cambios impredecibles, aunque puede ser
+      divertido experimentar con esto.
+    </p>
+    <p>
+      El al versión 6 de LSDj, Vshift sigue la configuración de Dist que se encuentre activa en ese
+      momento. Con Clip, Vshift aplastará la forma de onda contra el tope a medida que su valor se
+      incremente. Esto, al igual que Fold y Resync2, tiene el efecto de hacer que la forma de onda
+      tenga un volumen más bajo.
+    </p>
+    <p class="fig"><img src="vshift1.gif" /></p>
+    <p class="fig">
+      <audio controls><source src="vshift1.mp3" /></audio>
+    </p>
+    <p>
+      Al mover la configuración a Fold, comenzará a reflejarse de nueva cuenta a través del límite.
+      Con Vshift ajustado a FF, la onda original será invertida.
+    </p>
+    <p class="fig"><img src="vshift2.gif" /></p>
+    <p class="fig">
+      <audio controls><source src="vshift2.mp3" /></audio>
+    </p>
+    <p>Ajustado a Wrap, se reincorporará desde el fondo.</p>
+    <p class="fig"><img src="vshift3.gif" /></p>
+    <p class="fig">
+      <audio controls><source src="vshift3.mp3" /></audio>
+    </p>
+    <p>
+      ¡Con suerte ahora tienes una mejor idea de cómo funciona el sintetizador del canal Wave en
+      LSDj! Espero que esto te haya ayudado a explorar sin miedo todos los tipos de opciones que hay
+      y te dé un concepto de qué tipo de parámetros necesitas ajustar cuando busques conseguir un
+      sonido determinado. ¡Aunque también espero que esta clase experimentación te ayude a encontrar
+      un sonido que no hayas escuchado antes! ¡Nos vemos la próxima!
+    </p>
+    <p>Se despide, <a href="https://defensemech.com/">DEFENSE MECHANISM</a>.</p>
+  </body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="google-site-verification" content="EN4F_NZB7rOXAxpLulMjD2Z1KNZsJofAgY_VFCv-_7U" />
+    <meta property="og:title" content="DEFENSE MECHANISM" />
+    <meta property="og:type" content="website" />
+    <meta property="fb:app_id" content="378543469570238" />
+    <meta property="og:url" content="https://defensemech.com" />
+    <meta property="og:description" content="Intense Tech with Defense Mech - LSDj Technique" />
+    <meta property="og:image" content="https://defensemech.com/dm.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="https://defensemech.com/favicon.png" />
+    <link href="main.css" rel="stylesheet" />
+    <base target="_blank" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>
+      Intense Tech con Defense Mech - Analisis del Sintetizador del Canal Wave en LSDj Parte Uno
+    </title>
+  </head>
+  <body>
+    <h1 id="análisis-del-sintetizador-del-canal-wave-en-lsdj.-parte-uno">
+      Intense Tech con Defense Mech – Análisis del sintetizador del canal Wave en LSDj. Parte uno
+    </h1>
+    <p>
+      - Posted October 12th, 2018 by
+      <a href="https://apixelguy.com" title="Posts by Pixel Guy">Pixel Guy</a><br /><em
+        >Artículo Original de
+        <a href="https://defensemech.com/intense-tech/lsdj-wave-synth-deep-dive-part-1.html"
+          >DEFENSE MECHANISM</a
+        >. Traducción al Español por <a href="">Pixel Guy</a>.</em
+      >
+    </p>
+    <p>
+      ¡Hola, soy Defense Mechanism! Bienvenidos a la primera entrega de <em>Intense Tech</em>, donde
+      daremos un vistazo detallado a algunas de las características de LSDj. Mi objetivo es
+      compartir conocimiento y sabiduría que pase a las siguientes generaciones de
+      <em>chiptuners</em>, ¡la intención es crear un ejército de maestros en el
+      <em>bleepbloopin’</em>!
+    </p>
+    <hr />
+    <p>
+      Una de las características más confusas, y probablemente de las más intimidantes, del LSDj es
+      el sintetizador del canal Wave. Tengo fe en que después de trabajar en los siguientes
+      ejercicios; no solo encontrarás que es algo fácil de utilizar, sino que una vez que tengas una
+      idea clara de cómo funciona, entenderás por qué es uno de los aspectos más poderosos del LSDj.
+    </p>
+    <p>
+      Revisaré cada parámetro a profundidad para quitarle el misterio y saber qué es lo que está
+      pasando; pero primero, comencemos con un vistazo rápido al canal Wave del Gameboy en sí.
+    </p>
+    <p>
+      El canal Wave reproduce formas de onda de 4-bit y 32 <em>samples</em>.  Esto puede ser
+      representado por 32 dígitos en sistema hexadecimal  –0-F–, como se puede apreciar en la
+      pantalla WAVE del LSDj mostrada a continuación.
+    </p>
+    <p class="fig">
+      <img src="bgb_2018-09-24_11-43-06.png" /><br /><em
+        >Estén atentos: “8ECDCCBBAAA999888776665554433231” <strong>ESTARÁ</strong> en el examen.</em
+      >
+    </p>
+    <p>
+      Esto quiere decir que cada <em>sample</em> solo tendrá el volumen de un valor variable entre 0
+      y 15 (de 0 a F en hexadecimal). Comparado con el audio de 16-bit (el estándar más común para
+      las grabaciones), que permite 65,536 valores únicos de volumen, ¡el <em>depth</em> de 4-bit de
+      audio del Gameboy solo permite dieciséis valores para el volumen! Mientras que esto puede
+      parecer mucho menos con lo cual trabajar al hacer una comparación, está bien, ya que eso es
+      parte de lo que le da al canal Wave su característico sonido crujiente.
+    </p>
+    <p>
+      Comencemos viendo un poco de lo básico en lo que se refiere a formas de audio, como se puede
+      ver en <a href="https://es.wikipedia.org/wiki/Sinusoide">este gráfico de Wikipedia</a>:
+    </p>
+    <p class="fig"><img src="firefox_2018-09-24_12-03-51.png" /></p>
+    <p>
+      Al finalizar esta lección comprenderás cómo hacer una onda senoidal. Antes de que lleguemos
+      ahí, tenemos que explicar un poco de la teoría que está detrás de cómo son producidas las
+      notas musicales.
+    </p>
+    <p>
+      El sonido es causado por aire que vibra, y cada forma de onda mostrada arriba es una
+      representación de cómo lucirían esas vibraciones si pudieras verlas. También puedes
+      visualizarlas imaginando la forma en que una bocina se mueve hacia adelante y hacia atrás
+      cuando esta emite sonidos. La onda senoidal es la forma de onda más básica —ya que solo
+      contiene la frecuencia fundamental  pura de la nota base—. Las demás contienen
+      <a href="https://en.wikipedia.org/wiki/Overtone">armónicos</a> (múltiplos de la frecuencia
+      original). Al combinar diferentes armónicos a diferentes <em>ratios</em>, podemos crear formas
+      de onda que suenen diferente entre sí (esto es conocido como cambiar el «timbre» de un
+      sonido). Cuando escuchas la diferencia entre una nota tocada en un violín y la misma nota
+      tocada en una flauta; hay mucha diferencia en el timbre, ya que escuchas los resultados de la
+      mezcla de diferentes armónicos que son producidos cuando vibra el aire.
+    </p>
+    <p>
+      Para dar un ejemplo de un armónico: si multiplicas una frecuencia por dos, tendrás la misma
+      nota, pero una octava arriba. Al incrementar la multiplicación en uno se crea el siguiente
+      armónico.
+    </p>
+    <p>
+      Ejemplo: la 220 Hz (LSDj A3) – Fundamental, alias nota base. (Los nombres de las notas
+      corresponden a la versión 6 y superiores; para la versión 4 solo añade una octava).<br />
+      La 220 Hz x 2 = la 440 Hz (LSDj A4) – Una octava por encima (primer armónico).<br />
+      La 220 Hz x 3 = mi 660 Hz (LSDj E4) – Una octava y una quinta por encima (segundo
+      armónico).<br />
+      La 220 HZ x 4 = la 880 Hz (LSDj A5) – Dos octavas por encima (tercer armónico).<br />
+      La 220 Hz x 5 = do# 1100 Hz (LSDj C#5) – Dos octavas y una tercera mayor por encima (cuarto
+      armónico).<br />
+      La 220 Hz x 6 = mi 1320 Hz (LSDj E5) – Dos octavas y una quinta por encima (sexto armónico).
+    </p>
+    <p class="fig"><img src="harmonicseries.png" /></p>
+    <p>Las primeras seis notas en la serie armónica de la 220 Hz.</p>
+    <p>
+      La <a href="https://en.wikipedia.org/wiki/Harmonic_series_(music)">serie armónica</a> de una
+      nota incluye la nota en su frecuencia fundamental y esa misma frecuencia multiplicada por dos,
+      tres, cuatro y así sucesivamente. Cada múltiplo de 2 (2, 4, 8, 16, etc.) representa las
+      octavas de la frecuencia fundamental. Cada múltiplo de 3 (3, 6, 12, etc.) representa una
+      quinta por encima de la frecuencia fundamental (excepto por el 9 y sus múltiplos, los cuales
+      representan una décima mayor). Cada múltiplo de 5 (5, 10, 15, etc.) representa una tercera
+      mayor por encima de la fundamental. Algunas multiplicaciones con números impares, incluyendo
+      el 7 y para arriba, no cuadran con notas convencionales. Por ejemplo: 7 es una especie de
+      séptima menor desafinada; 11, sería una quinta disminuida desafinada.<br />
+      (Inclusive la tercera mayor en las series armónicas está afinada un poco diferente que en la
+      mayoría de los sistemas modernos de afinación, pero se acerca tanto que termina por  convencer
+      a tus oídos).
+    </p>
+    <p>
+      La forma de onda por defecto en LSDj es una
+      <a href="https://en.wikipedia.org/wiki/Sawtooth_wave">onda de sierra</a>, la cual se crea
+      cuando las ondas senoidales de toda la serie armónica se combinan.
+    </p>
+    <p class="fig">
+      <img src="audacity_2018-09-24_11-42-38.png" /><br /><em
+        >Un ciclo completo de una onda de sierra generada en Audacity.</em
+      >
+    </p>
+    <p class="fig">
+      <img src="bgb_2018-09-24_11-43-06-1.png" /><br /><em
+        >Un ciclo completo de una onda de sierra generada en LSDj.</em
+      >
+    </p>
+    <p>
+      Escucha este ejemplo de audio de una onda de sierra en Audacity, seguida de una onda de sierra
+      en LSDj a 440 Hz.
+    </p>
+    <p><audio src="sawtooth.mp3">sawtooth.mp3</audio></p>
+    <p class="fig"><img src="audacity_2018-09-24_11-58-07.png" /></p>
+    <p>(Formas de onda puestas una junto a la otra para fines comparativos).</p>
+    <p>
+      Escucharás una pequeña diferencia, pero todo suena mejor en LSDj, con una sorprendente
+      fidelidad y calidad de audio.
+    </p>
+    <p>
+      Esta onda de sierra es representada como <img src="bgb_2018-09-24_13-37-35.png" /> en la
+      pantalla Synth de LSDj.
+    </p>
+    <p>
+      La <a href="https://en.wikipedia.org/wiki/Square_wave">onda cuadrada</a>,
+      <img src="bgb_2018-09-24_13-37-55.png" />, es construida al combinar ondas senoidales de la
+      serie armónica, pero solo en armónicos extraños. Muchos de nosotros probablemente conocemos
+      ese sonido distintivo de una onda cuadrada (la cual también puede ser construida en el canal
+      Pulse poniendo el <em>duty cycle</em> al 50 %).
+    </p>
+    <p>
+      La onda triangular, <img src="bgb_2018-09-24_13-38-14.png" />, (nota: no deben confundirla; el
+      ícono de triángulo puede parecer una onda senoidal.) es construida de la misma forma que la
+      onda cuadrada, usando armónicos extraños, pero estos bajan su volumen a medida que aumentan su
+      frecuencia (más de lo que lo hacen las ondas cuadradas). Su sonido es adecuado para un bajo
+      profundo, puede que estés familiarizado con ella si has escuchado el canal de 4-bit de onda
+      triangular de la NES.
+    </p>
+    <p>
+      No parece posible el crear una onda senoidal en LSDj, ya que el parámetro s<em>ignal</em> solo
+      tiene las tres opciones mencionadas anteriormente y  la onda senoidal es la notable ausente.
+      Sin embargo, ya que cada una de esas formas de onda está fundamentalmente construida a partir
+      de ondas senoidales, puedo mostrarte cómo extraer una de ellas de cualquiera de esas opciones.
+    </p>
+    <p>
+      De forma conveniente, el siguiente parámetro en la pantalla Synth, Filter, es la herramienta
+      que necesitamos.
+    </p>
+    <p>
+      Con Filter, tenemos cuatro opciones: Lowpass (Lowp), Highpass (Highp), Bandpass (Bandp) y
+      Allpass (Allp).
+    </p>
+    <p>
+      Si estás familiarizado con los filtros tradicionales de un sintetizador analógico o digital,
+      es muy probable que ya entiendas esto. Si no, puedes ver los filtros de LSDj como elegir entre
+      qué armónicos permites que se escuchen en el sonido que se produce en tu forma de onda final.
+      La frecuencia en la que el filtro actúa es seleccionada por el parámetro de Cutoff.
+    </p>
+    <p>
+      Con Lowpass, solo los armónicos del Cutoff y debajo del mismo «pasarán» el filtro, lo que
+      quiere decir que tu frecuencia fundamental es el tono más bajo, pero lo puede expandir hasta
+      incluir los armónicos más altos (en LSDj eso es hasta quince armónicos, en teoría). Con
+      Highpass solo los armónicos más altos del Cutoff y por encima del mismo pasarán, aunque lo
+      puedes expandir para incluir los bajos. Con Bandpass solo el rango de armónicos especificado
+      por el Cutoff pasará. Por último, con Allpass todos los armónicos pasarán, pero algunas fases
+      de los armónicos serán cambiadas a donde el Cutoff hace énfasis, como resultado se producen
+      diferentes timbres.
+    </p>
+    <p>
+      Dejando de lado esa explicación un tanto simplista; lo siguiente que veremos es qué pasa
+      cuando ponemos el Cutoff de nuestro filtro de Lowpass a un valor de 10. Ya que esto es 0x10
+      (16 en hexadecimal), que se encuentra  dentro de un posible 0xFF (255 en hexadecimal), solo
+      estamos permitiendo a nuestro filtro el que pase la nota más baja de la serie armónica: la
+      fundamental. Recuerda que si solo quieres escuchar la primera forma de onda de Synth, tienes
+      que poner la función Play en modo Manual en la pantalla Instrument del canal Wave.
+    </p>
+    <p class="fig">
+      <img src="bgb_2018-09-24_12-58-37.png" /><br /><em
+        >¡Una forma de onda senoidal salvaje ha aparecido!</em
+      >
+    </p>
+    <p>
+      Podemos observar que se ve un poco aplastada, así que incrementaremos el valor de Q, también
+      conocido como resonancia. Este parámetro nos dará un incremento en el volumen dondequiera que
+      el Cutoff de nuestro filtro esté puesto, dejando el resto de los armónicos con el mismo
+      volumen. Pongamos Q a 1 para aumentar solo el volumen de la nota fundamental  y veamos qué
+      pasa:
+    </p>
+    <p class="fig"><img src="bgb_2018-09-24_12-55-16.png" /></p>
+    <p>
+      Está en algún lugar entre una onda senoidal y una triangular aplastada. Bajemos el volumen a
+      08 y subamos Q a 3. El parámetro Volume ajusta el volumen global de Signal, antes de que
+      Filter y Q sean aplicados.
+    </p>
+    <p class="fig"><img src="bgb_2018-09-24_12-56-05.png" /></p>
+    <p>
+      ¡Eso se parece mucho a una onda senoidal en mi opinión! Siéntanse libres de experimentar con
+      valores diferentes para Q, Cutoff y Volume; solo ajústenlos a como les gusten.
+    </p>
+    <p>
+      Al tocar notas en octavas bajas con esta forma de onda se generan los sonidos más bajos —y
+      adecuados para el instrumento del mismo nombre— posibles en el canal Wave. La misma contiene
+      la menor cantidad de armónicos posible, lo que la hace una opción perfecta para un
+      <em>kick</em> o un sub bajo. En una situación ideal, una onda senoidal no contiene armónicos
+      en lo absoluto, solo la frecuencia fundamental. Sin embargo, ya que el <em>depth</em> del
+      canal Wave solo nos da 16 valores para volumen, solamente podemos hacer un aproximado muy
+      burdo de una onda senoidal, teniendo como resultado algunos armónicos que se cuelan en nuestro
+      sonido.
+    </p>
+    <p>
+      Para terminar esta lección, quiero mostrarles que cada múltiplo de 10 del Cutoff, de hecho,
+      representa un armónico en la serie armónica. Esto se vuelve más claro cuando cambiamos el
+      Lowpass por Bandpass y elevamos el volumen a 20. Pueden notar como si ponen el Cutoff a 20,
+      escucharán un armónico una octava por encima. Si lo ponen a 30, escucharán un armónico una
+      octava y una quinta por encima. A 40, escucharán un armónico dos octavas encima y así
+      sucesivamente. Si incrementas el valor de Cutoff en el filtro, puedes experimentar subiendo el
+      valor de Q para enfatizar aún más los armónicos que seleccionaste; entre más alto sea el valor
+      de tu Cutoff, más bajo será el volumen del armónico resultante (lo que es una característica
+      natural de cómo es construida una onda de sierra).
+    </p>
+    <p class="fig"><img src="bgb_2018-09-25_14-14-37.png" /></p>
+    <p>
+      Y recuerda; si cambias tu forma de onda a cuadrada o triangular, hay menos armónicos en las
+      mismas, lo que podría hacer que parezca que algunas de las octavas o algunos otros armónicos
+      se hayan ido.
+    </p>
+    <p>Cutoff a 20:</p>
+    <p class="fig"><img src="bgb_2018-09-24_13-12-35.png" /></p>
+    <p class="fig">
+      <audio controls><source src="cutoff20.mp3" type="audio/mpeg" /></audio>
+    </p>
+    <p>Cutoff a 30:</p>
+    <p class="fig"><img src="bgb_2018-09-24_13-12-50.png" /></p>
+    <p class="fig">
+      <audio controls><source src="cutoff30.mp3" type="audio/mpeg" /></audio>
+    </p>
+    <p>Cutoff a 40:</p>
+    <p class="fig"><img src="bgb_2018-09-24_13-13-03.png" /></p>
+    <p class="fig">
+      <audio controls><source src="cutoff40.mp3" type="audio/mpeg" /></audio>
+    </p>
+    <p>
+      ¿Estás observando algún patrón en las formas de onda resultantes cuando incrementamos el
+      Cutoff? Mantén esas observaciones en mente, ¡ya que las usaremos en la próxima entrega!
+    </p>
+    <p>
+      ¡Gracias por leer! Espero que hayas disfrutado este tutorial, ¡nos vemos la próxima, cuando
+      veamos el resto de los componentes de Synth en el canal Wave!
+    </p>
+    <p>Se despide, <a href="https://defensemech.com/">DEFENSE MECHANISM</a>.</p>
+  </body>
+</html>
