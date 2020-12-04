@@ -112,8 +112,8 @@ respecto a los viejos envolventes con el nuevo ADSR del software.
 <style>
 th { display: none;}
 </style>
- | 
- --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--
+x |x |x |x |x |x |x |x |x |x |x |x |x |x |x |x |x
+--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--
 **Software** | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F
 **Hardware** | 0 | - | - | - | - | - | 1 | - | 2 | 3 | 4 | 5 | 6, 7 | - | - | -
 
