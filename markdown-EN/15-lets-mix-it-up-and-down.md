@@ -1,10 +1,6 @@
-Intense Tech With Defense Mech -- Let's Mix It Up (and Down)!
-=============================================================
-
-\- Posted April 30th, 2020 by [DEFENSE
-MECHANISM](https://defensemech.com "Posts by DEFENSE MECHANISM")
-
-<div>
+**Intense Tech With Defense Mech -- Let's Mix It Up (and Down)!**
+- Posted April 30th, 2020 by [DEFENSE
+MECHANISM](https://defensemech.com) *Note: [traducción al Español por Pixel Guy encontrado aquí.](../es/15-que-no-se-te-pase-la-mezcla.md.html)*
 
 Hello again, and welcome back to another edition of Intense Tech! This
 month, let's take a look at some different ways to consider mixing in
@@ -42,6 +38,8 @@ channel, and hi hats and snare in the noise channel. Listen to the
 difference between the first part without panning, and the second part
 with panning:
 
+![ ](../media/panning.mp4)
+
 Control Frequency Using Octaves
 -------------------------------
 
@@ -49,6 +47,8 @@ This might seem so obvious, but don't overlook the possibilities that
 you have by doing some simple octave transposing. Using the previous
 example, let's examine what happens when we apply an octave transpose to
 the melody:
+
+![ ](../media/octave.mp4)
 
 This can freshen up a lead that might seem a bit stale, and it has the
 added benefit of making sure that two instruments don't get caught
@@ -66,13 +66,15 @@ counts!
 Control Volume Using Transients
 -------------------------------
 
-A *[transient](https://en.wikipedia.org/wiki/Transient_(acoustics))* is
+A [*transient*]("https://en.wikipedia.org/wiki/Transient_(acoustics)") is
 a sound that contains a sudden loud, short burst at the beginning. I
 learned this great trick from [Pain
 Perdu](https://soundcloud.com/pain-perdu): You can utilize this burst of
 noise to make a snare stand out in the mix without overpowering the
 other channels. Here is are three example of a snare that's soft, then
 loud, then utilizing a transient:
+
+![ ](../media/snare.mp4)
 
 Setting the instrument volume to a relatively medium or high volume like
 90 means the instrument starts with this loud volume, and the volume is
@@ -89,28 +91,32 @@ Control Wave Channel Volume Using Limit
 
 The wave channel can provide a lot of power and impact in a track, but
 sometimes volume control can be tricky. Using E commands provides
-limited help in cases where E03 at 100% volume is too loud, but E02 at
+limited help in cases where `E03` at 100% volume is too loud, but `E02` at
 50% volume is too soft. Using Limit in the wave synth instrument lets
 you keep the wave synth at full volume while controlling the maximum
 volume of the waves. You might recall that Limit will constrain the
 dynamic range of the waveform to a certain range of volume, no matter
 how loud the Volume for the wave synth or the wave instrument is set.
-Setting Limit to 8 will reduce the wave instrument to 50% volume even
-while set to Volume level 3, so setting Limit anywhere from 9 (about 56%
-volume) to E (about 94% volume) will allow you to access more variation
+Setting Limit to `8` will reduce the wave instrument to 50% volume even
+while set to Volume level `3`, so setting Limit anywhere from `9` (about 56%
+volume) to `E` (about 94% volume) will allow you to access more variation
 in volume. See the example video below:
+
+![ ](../media/limit1.mp4)
 
 Additionally, if you set the start and end points to different Limit
 values, you can use W commands to control the speed and length. This
 allows for even greater control of volume, as shown in the following
 example:
 
+![ ](../media/limit2.mp4)
+
 Control Pulse Channel Volume Using ADSR
 ---------------------------------------
 
 Lastly, there is a wonderful feature in the newest versions of LSDj
 which is the volume
-[ADSR](https://en.wikipedia.org/wiki/Envelope_(music)#ADSR). It might
+[ADSR]("https://en.wikipedia.org/wiki/Envelope_(music)#ADSR"). It might
 seem confusing at first, but you can consider it like chaining E
 commands together. For each stage of the ADSR, the first digit specifies
 volume and the second digit specifies the length. Once you provide the
@@ -122,18 +128,11 @@ fades in, increasing in volume until the volume maxes out at F (or until
 the next E command), the next stage of the ADSR can be set to a lower
 maximum volume. Here's an example of how the ADSR works:
 
+![ ](../media/adsr.mp4)
+
 In previous versions as well as current versions of LSDj, ADSR can be
 mimicked with the volume column of a table. Although it uses an extra
 table, it can be helpful when the regular E commands don't provide the
 extra level of detail you might need when trying to get that part to sit
 just right in the mix.
 
-That's it for this month's edition of Intense Tech! What other topics
-would you like to see covered? Feel free to send your comments my way at
-<defensem3ch@gmail.com>. Until next time, this is DEFENSE MECHANISM,
-signing off!
-
-*Note: traducción al Español [por Pixel Guy encontrado
-aquí.](que-no-se-te-pase-la-mezcla.html)*
-
-</div>

@@ -1,5 +1,5 @@
 **Intense tech con Defense Mech – Las alegrías del ruido**
--Publicado November 5, 2020 por [DEFENSE MECHANISM](https://defensemech.com). Tradución por [Pixel 
+-Publicado November 5, 2020 por [DEFENSE MECHANISM](../en/17-the-joys-of-noise.md.html). Traducción por [Pixel 
 Guy](https://apixelguy.com/)
 
 ¡Hola y bienvenidos a otra edición de Intense tech! En esta ocasión nos adentraremos en la 
@@ -22,7 +22,7 @@ retroalimentación lineal (LFSR por sus siglas en inglés)». Para nuestros fine
 saber que es una manera rápida y fácil de conseguir ruido pseudoaleatorio; este genera una serie de 
 ondas de pulso de un bit, cada una con una amplitud aleatoria. El ruido se crea de acuerdo al reloj 
 del procesador, el cual es dividido de acuerdo a un divisor —excepto por el número más alto, el 
-cual, de hecho, dobla la frecuencia—.  El resultado es dividido entre una potencia de dos, lo que 
+cual, de hecho, dobla la frecuencia.  El resultado es dividido entre una potencia de dos, lo que 
 básicamente controla la octava en la que se produce el ruido. Esto se traslada al LSDj para 
 permitirnos controlar la octava con el primer dígito de Shape, mientras que el segundo controla la 
 frecuencia divisoria. 
@@ -53,15 +53,15 @@ Shape hacia arriba o hacia abajo (una vez alcanzado el punto más alto o más ba
 no tiene ningún efecto). El tono de la nota no afecta la forma del ruido, solo el valor de la 
 octava.*</div>
 
-Probablemente ya te diste cuenta de que el valor divisor del segundo dígito es el mismo para F y  7, 
-los mismo pasa con E y 6, etc.; esto se debe a los valores de 0 a 7 ajustan el modo **short-loop**, 
-mientras que los dígitos de 8 a F ajustan el modo **long-loop**. El modo *short-loop* quiere decir que 
+Probablemente ya te diste cuenta de que el valor divisor del segundo dígito es el mismo para `F` y  `7`, 
+los mismo pasa con `E` y `6`, etc.; esto se debe a los valores de `0` a `7` ajustan el modo **short-loop**, 
+mientras que los dígitos de `8` a `F` ajustan el modo **long-loop**. El modo *short-loop* quiere decir que 
 la forma de onda del ruido tiene la mitad de su longitud y, como resultado, produce sonidos más 
 tonales, metálicos y resonantes. El modo *long-loop* ajusta la onda a su duración completa, lo que 
 resulta en un sonido menos afinado y más parecido al ruido blanco. Podemos comprobarlo descendiendo 
-el segundo dígito al ir de CF a C0:
+el segundo dígito al ir de `CF` a `C0`:
 
-![](noise-sweep-1604523198.mp4)
+![](../media/noise-sweep.mp4)
 
 A diferencia del sintetizador del canal Wave donde los sonidos son creados a partir de multiplicar 
 la frecuencia base por números completos para generar la serie armónica, las notas del canal Noise 
@@ -70,7 +70,7 @@ enteros. Dado que la nota base es cercana en frecuencia a do, podemos ver qué n
 se divide la frecuencia entre cada número:
 
 ![*Los tonos disponibles en el modo* short-loop *no son exactos, pero suenan muy parecidos a do, fa, 
-la♭, y re.*](negative-harmonic-series.png)
+la♭, y re.**](../media/negative-harmonic-series.png)
 
 Un ejemplo excelente del uso del modo *short-loop* para generar notas es este demo, de
 [they/them](https://theythemmusic.bandcamp.com/), en el cual solo se usa el canal Noise.
@@ -117,7 +117,7 @@ los modos *short-loop* y *long-loop*, en ocasiones aún es necesario el crear ta
 comandos S cuando quieras hacer un paso más suave entre formas de ruido. Aquí hay un par de ejemplos 
 de cómo hacer eso usando tables para hacer una transición suave al descender y al ascender:
 
-![](custom-sweep-1604589887.mp4)
+![](../media/custom-sweep.mp4)
 
 Trabajando con los raros
 ------------------------
@@ -141,7 +141,7 @@ comando Z utiliza valores aleatorios para cada dígito por separado, lo que nos 
 variaciones dentro de un determinado modo de bucle dentro de ciertas octavas. ¡Pero no tengas miedo 
 de salir de ahí!
 
-![](noise-crash-1604582892.mp4)
+![](../media/noise-crash.mp4)
 
 <div class="fig">En este ejemplo, Z puede añadir 1 al primer dígito cuatro veces, lo que quiere 
 decir que el mayor dígito posible es F. Si este excediera F, entonces volvería a empezar desde 0 
@@ -160,7 +160,7 @@ funciona el canal Noise, comencé a reconsiderar la manera en la que hago dichos
 canal Noise. Como siempre, este solo un ejemplo de cómo puede verse un kick en este canal. Después 
 de que explique mis métodos, ¡espero que puedas utilizarlos a tu manera!
 
-![](noise-kick-1604585213.mp4)
+![](../media/noise-kick.mp4)
 
 <div class="fig">Este ejemplo comienza ralentizando la table de manera que puedas ver y escuchar 
 cómo suena el kick a medida que se mueve la table por todas las líneas. Comienzo con un valor base 
@@ -187,7 +187,7 @@ la duración de cada tick) y la forma del ruido. También puedes usar los valore
 `R8F` —la reactivación rápida—, los cuales no son afectados por el tempo de la canción o el valor de 
 LENGTH. Aquí hay un video que ilustra algunos ejemplos:
 
-![](noise-retrig-1604592926.mp4)
+![](../media/noise-retrig.mp4)
 
 Tiempo de resultados
 --------------------
@@ -208,28 +208,11 @@ SAV**](https://defensemech.com/intense-tech/dotexe-NOIZE_JAMS.sav) <-- </span></
 Por favor, ¡apoyen a .exe [comprando su álbum en 
 Bandcamp!](https://dotexechiptune.bandcamp.com/album/jams-exe)
 
-------------------------------------------
-
-¡Espero que hayas disfrutado este recorrido por el canal Noise! Gracias a todos mis patrons por su 
-apoyo. Si quisieras apoyarme, por favor considera [unirte a mi 
-Patreon](https://patreon.com/defensem3ch). Significaría mucho y me ayudaría a continuar creando este 
-contenido, pagar por las traducciones ¡y tener sus ideas para próximos artículos!
-
 <center>
-  <p>
-    <a href="https://patreon.com/defensem3ch"><img src="../patreon.png" alt="Patreon" /></a       
-    ><a href="https://www.paypal.com/donate?hosted_button_id=XNGKRVMEPMN36"
-    ><img src="../paypal.jpg" alt="Paypal"
-    /></a>
-  </p>
+<iframe style="border: 0; width: 350px; height: 470px;" 
+src="https://bandcamp.com/EmbeddedPlayer/album=3256814611/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" 
+seamless><a href="https://dotexechiptune.bandcamp.com/album/jams-exe">JAMS.exe by .exe</a></iframe>
 </center>
 
-¡Muchas gracias por leer y hasta la próxima! Se despide, [DEFENSE 
-MECHANISM](https://defensemech.com).
+------------------------------------------
 
-<!-- Markdeep: --><style 
-class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script 
-src="https://morgan3d.github.io/markdeep/latest/markdeep.min.js" 
-charset="utf-8"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible");window.markdeepOptions 
-= {tocStyle: "none"};</script>
-</html>

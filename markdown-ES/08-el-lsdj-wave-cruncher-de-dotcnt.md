@@ -1,12 +1,10 @@
-Intense Tech con Defense Mech -- ¡El LSDj Wave Cruncher de DOTCNT! {#el-lsdj-wave-cruncher-de-dotcnt}
-==================================================================
-
-\- Posted June 25th, 2019 by [Pixel
-Guy](https://apixelguy.com "Posts by Pixel Guy")\
-*Artículo Original de [DEFENSE MECHANISM](dotcnts-lsdj-wave-cruncher/).
+**Intense Tech con Defense Mech -- ¡El LSDj Wave Cruncher de DOTCNT!**
+- Posted June 25th, 2019 by [Pixel
+Guy](https://apixelguy.com)
+*Artículo Original de [DEFENSE MECHANISM](../en/08-dotcnts-lsdj-wave-cruncher.md.html).
 Traducción al Español por [Pixel Guy](https://apixelguy.com).*
 
-¡Bienvenidos de vuelta a *Intense tech con Defense Mech*! En esta
+¡Bienvenidos de vuelta a *Intense tech*! En esta
 lección cubriremos el cómo utilizar el *[LSDj Wave
 Cruncher](https://github.com/iLambda/lsdj-wave-cruncher)*, de
 [DOTCNT](https://www.facebook.com/dotcnt/), para tomar muestras y
@@ -30,6 +28,16 @@ pregunta al tiempo que hacemos un análisis profundo de la increíble obra
 de [DOTCNT](https://www.facebook.com/dotcnt/): ¡[LSDj wave
 cruncher](https://github.com/iLambda/lsdj-wave-cruncher)!
 
+      <iframe
+      style="height: 166px; width: 100%;"
+        scrolling="no"
+        allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/337969906&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true"
+        width="100%"
+        height="166"
+        frameborder="no"
+      ></iframe>
+
 Tuve la fortuna de conocer a Ada, también conocida como
 [DOTCNT](https://soundcloud.com/dotcnt), en Francia el año pasado; e
 inmediatamente la elogié por el asombroso trabajo que ha hecho al
@@ -42,7 +50,7 @@ permite jugar con la notas, hacer curvaturas de tono, arpegiar los
 acordes, etc., en formas que no podrías lograr de tocar las muestras de
 los kits en el ROM de LSDj. En esta lección haremos uso de un montón del
 conocimiento ganado en los [artículos previos de esta
-columna](author/defensemech/), ¡así que siéntanse libres de volver a
+columna](https://defensemech.com/intense-tech/), ¡así que siéntanse libres de volver a
 leerlos si lo necesitan!
 
 La [herramienta original](https://github.com/iLambda/lsdj-wave-cruncher)
@@ -53,7 +61,7 @@ deberían de correr en la Consola de Comandos o Ventana Terminal de
 máquinas con Mac, Windows o Linux sin requerir de ninguna configuración.
 (Si necesitas de un recordatorio sobre la Consola de Comandos/Ventana
 Terminal, puedes revisar [el artículo que escribí sobre
-libLSDj](organiza-tus-archivos-de-guardado-con-liblsdj.html).) Hay
+libLSDj](04-organiza-tus-archivos-de-guardado-con-liblsdj.md.html).) Hay
 algunos otros requerimientos importantes que necesitarás cumplir antes
 de comenzar a «aplastar» algunas ondas. Primero necesitarás una muestra
 del instrumento. Lo ideal sería un archivo WAV que contenga solo una
@@ -61,7 +69,7 @@ nota. También es importante que dicha nota sea tonal, es decir, necesita
 tener un tono constante. Piensa en un instrumento que toque una nota y
 tendrás una idea de la clase de sonidos que trabajarían bien en el Wave
 Cruncher. Los sonidos con muchos
-[armónicos](analisis-del-sintetizador-del-canal-wave-en-lsdj-parte-uno.html)
+[armónicos](01-analisis-del-sintetizador-del-canal-wave-en-lsdj-parte-uno.md.html)
 --como las campanas, pianos eléctricos, tambores metálicos de Trinidad y
 Tobago, etc.-- funcionan particularmente bien. Los sonidos que no
 funcionan adecuadamente son aquellos especialmente «sucios» o no
@@ -69,10 +77,9 @@ tonales, como las cajas, los silbatos de tren, los *vibraslap* o
 muestras de canciones de los [Red Hot Chili
 Peppers](https://penzeys.com).
 
-Para este ejemplo utilicé una muestra de un piano eléctrico.
+Para este ejemplo utilicé una muestra de un piano eléctrico
 
-\
-Muestra de un piano eléctrico (FM).
+![Muestra de un piano eléctrico (FM)](../media/epiano.mp3)
 
 Lo siguiente que necesitarás es el [archivo binario del Wave
 Cruncher](https://github.com/urbster1/lsdj-wave-cruncher/releases).
@@ -104,15 +111,18 @@ guardado](biblioteca-de-instrumentos-lsdj-wave-cruncher.html) usando el
 [*wavetable patcher* incluido en el
 libLSDj](https://github.com/stijnfrishert/liblsdj/releases).
 
-Demos un vistazo al archivo de salida cuando corremos\
+Demos un vistazo al archivo de salida cuando corremos
+
 `crunch-win.exe epiano.wav auto`
 
-`$ crunch-win.exe epiano.wav auto`\
-`Crunching data...`\
-`Auto-detecting frequency...`\
-`Frequency detected: 136.47859664570356 Hz`\
-`Saving data as epiano.snt... Done!`\
-`Successfully output epiano.snt!`
+```none
+$ crunch-win.exe epiano.wav auto
+Crunching data...
+Auto-detecting frequency...
+Frequency detected: 136.47859664570356 Hz
+Saving data as epiano.snt... Done!
+Successfully output epiano.snt!
+```
 
 Ahora podemos parchar «epiano.snt» en nuestro archivo de guardado de
 LSDj. Sin embargo, aún podemos añadir algunas banderas (o *flags*) para
@@ -125,7 +135,8 @@ totalidad el sonido de la muestra, especialmente si esta es larga. La
 primera bandera, «`--linear`», toma un muestreo lineal de los ciclos de
 la onda completa; de principio a fin. Podríamos decir que la muestra
 entera es partida equitativamente en dieciséis fragmentos iguales y se
-toma un ciclo de onda de cada uno.\
+toma un ciclo de onda de cada uno.
+
 La segunda bandera, «`--exp`», imita una especie de muestreo
 exponencial. En otras palabras: toma más ciclos de onda del inicio de la
 muestra y menos del final. Esto puede resultar útil si tratas de dar
@@ -176,29 +187,33 @@ segundos el detectar la frecuencia, especificaré el valor en lugar de
 utilizar «auto», solo para apresurar las cosas. Veamos los sonidos
 resultantes al añadir diferentes banderas.
 
-`$ crunch-win.exe epiano.wav 136.47859664570356 --normalize --linear         --output=epiano-lin.snt`\
-`Crunching data...`\
-`Samples: 311847`\
-`Sample rate: 44100`\
-`Cycles: 965`\
-`Linear interpolation`\
-`Taking frame every 60 cycles`\
-`Saving data as epiano-lin.snt...`\
-`Done!`\
-`Successfully output epiano-lin.snt!`
+```none
+$ crunch-win.exe epiano.wav 136.47859664570356 --normalize --linear --output=epiano-lin.snt
+Crunching data...
+Samples: 311847
+Sample rate: 44100
+Cycles: 965
+Linear interpolation
+Taking frame every 60 cycles
+Saving data as epiano-lin.snt...
+Done!
+Successfully output epiano-lin.snt!
+```
 
-`$ crunch-win.exe epiano.wav 136.47859664570356 --normalize --exp         --output=epiano-exp.snt`\
-`Crunching data...`\
-`Samples: 311847`\
-`Sample rate: 44100`\
-`Cycles: 965`\
-`Exponential interpolation`\
-`Saving data as epiano-exp.snt...`\
-`Done!`\
-`Successfully output epiano-exp.snt!`
+```none
+$ crunch-win.exe epiano.wav 136.47859664570356 --normalize --exp --output=epiano-exp.snt
+Crunching data...
+Samples: 311847
+Sample rate: 44100
+Cycles: 965
+Exponential interpolation
+Saving data as epiano-exp.snt...
+Done!
+Successfully output epiano-exp.snt!
+```
 
 Una vez que hayas corrido el Wave Cruncher; puedes seguir [las
-instrucciones aquí](biblioteca-de-instrumentos-lsdj-wave-cruncher.html)
+instrucciones aquí](05-biblioteca-de-instrumentos-lsdj-wave-cruncher.md.html)
 indicadas para parchar tus archivos .snt en tus archivos de guardado o
 lsdsng. Recuerda que tienes que ajustar los parámetros de Play, Length y
 Speed en la pantalla Instrument del canal Wave de manera apropiada.
@@ -212,8 +227,8 @@ Instrument 1, 2 y 3; además de los espacios Synth 1, 2 y 3
 respectivamente. Las Chains y Phrases 01, 02 y 03 reproducirán los
 sonidos correspondientes.
 
-\
-***Cada instrumento sintetizado requerirá de diferentes parámetros.***
+
+![Cada instrumento sintetizado requerirá de diferentes parámetros.](../media/epiano.mp4)
 
 ¡Espero que este artículo te dé una visión de lo que es el Wave Cruncher
 y te motive a tratar de procesar tus propios *samples*!
@@ -222,5 +237,4 @@ Háganse un favor y revisen más del material de [DOTCNT
 aquí](http://facebook.com/dotcnt/) y
 [aquí](https://soundcloud.com/dotcnt), ¡por favor!
 
-Como siempre, si tienes alguna pregunta, siéntete libre de contactarme a
-través de [DEFENSE MECHANISM](mailto:defensem3ch@gmail.com).
+------------------------------------------

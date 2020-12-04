@@ -1,9 +1,7 @@
-Intense Tech with Defense Mech -- So You Want a Cartridge Family?
-=================================================================
+**Intense Tech with Defense Mech -- So You Want a Cartridge Family?**
+- Posted May 21st, 2020 by [DEFENSE MECHANISM](https://defensemech.com) *Note: [traducción al Español por Pixel Guy encontrado aquí.](../es/16-asi-que-quieres-hablar-de-cartuchos.md.html)*
 
-\- Posted May 21st, 2020 by [DEFENSE MECHANISM](https://defensemech.com)
-
-Welcome back to Intense Tech with Defense Mech! Although I usually
+Welcome back to Intense Tech! Although I usually
 discuss techniques within LSDj, I get a lot of questions about what kind
 of cartridges I recommend. The Game Boy flash cartridge market tends to
 change every few years, so I hope to add more information as it becomes
@@ -26,10 +24,10 @@ While the [Everdrive GB
 X5](https://krikzz.com/store/home/47-everdrive-gb.html) is a perfectly
 reasonable and functional choice of cartridge as it supports the
 necessary 128kb SRAM that is required for LSDj to function, they are
-often cost-prohibitive, costing around \$90 or more. A much cheaper
-alternative is the EZ Flash Jr, which can be purchased for around [\$60
+often cost-prohibitive, costing around $90 or more. A much cheaper
+alternative is the EZ Flash Jr, which can be purchased for around [$40
 on
-Amazon](https://www.amazon.com/EZ-Flash-EZ-FlashJr-Original-Everdrive/dp/B08379XZWY)
+catskullelectronics.com](https://catskullelectronics.com)
 as well as Game Boy modding shops (*Note: prices may have risen since
 this article's publication depending on availability so it may be
 worthwhile to check different vendor websites*).
@@ -67,9 +65,8 @@ USB-based flash cartridges
 new USB-based flash cartridge, the
 [LinkNLoad32!](https://shop.insidegadgets.com/product/gameboy-linknload32-flash-cart-4mb-128kb-fram-with-usb/).
 Using the [GBxCart flasher software](https://www.gbxcart.com/), you are
-able to update and back up this cartridge with ease. Although I haven\'t
-used it, I can vouch for the quality of insideGadgets cartridges in
-general, and would recommend this cart if you are interested in a
+able to update and back up this cartridge with ease. I can vouch for the quality of insideGadgets 
+cartridges and would recommend this cart if you are interested in a
 dedicated LSDJ flash cartridge.
 
 Possibly the most popular cartridge format are those with their own
@@ -108,7 +105,7 @@ rock-solid cartridges and flashers for very reasonable prices.
 
 A 1MB cartridge with 128kb SRAM is completely sufficient to run LSDj,
 and [this cartridge runs only
-\$29](https://shop.insidegadgets.com/product/gameboy-1mb-128kb-sram-flash-cart/).
+$29](https://shop.insidegadgets.com/product/gameboy-1mb-128kb-sram-flash-cart/).
 The shop will flash the LSDj rom of your choice onto the cartridge
 before it ships, which means you can get straight to composing in LSDj
 on your Game Boy as soon as you get it.
@@ -117,7 +114,7 @@ However, if you want to be able to upgrade LSDj, backup your save file,
 change the samples on your LSDj rom, or copy a new save onto the
 cartridge, you'll need the [GBxCart-mini
 flasher](https://shop.insidegadgets.com/product/gbxcart-rw/) in addition
-to the cartridge itself**.** Together, they cost \$50, which is less
+to the cartridge itself. Together, they cost $50, which is less
 than the EZ Flash Jr. (not including the cost of a microSD card). But if
 you're like me and you want to have two different cartridges (or even
 three or four), the cost will be cheaper for each additional cartridge
@@ -141,10 +138,3 @@ cartridge](https://shop.insidegadgets.com/product/gameboy-4mb-128kb-fram-flash-c
 uses battery-less memory, meaning you will never have to worry about a
 lost save due to a dead cartridge battery. That's pretty great!
 
-I hope you find this useful and if you find any cartridges that I missed
-out on, please [let me know](mailto:defensem3ch@gmail.com) so I can
-update this for future users. Until next time, this is [DEFENSE
-MECHANISM](https://defensemech.com), signing off!
-
-*Note: traducción al Español [por Pixel Guy encontrado
-aquí.](https://chiptuneswin.com/blog/intense-tech-con-defense-mech-asi-que-quieres-hablar-de-cartuchos/)*

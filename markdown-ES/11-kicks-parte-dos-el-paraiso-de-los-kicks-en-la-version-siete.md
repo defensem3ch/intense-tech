@@ -1,13 +1,9 @@
-Intense tech con Defense Mech -- kicks parte dos: ¡El paraíso de los kicks en la versión siete! {#kicks-parte-dos-el-paraíso-de-los-kicks-en-la-versión-siete}
-===============================================================================================
+**Intense tech con Defense Mech -- kicks parte dos: ¡El paraíso de los kicks en la versión siete!** 
+- Posted November 8th, 2019 by [Pixel Guy](https://apixelguy.com) 
+*Artículo original de* [*DEFENSE MECHANISM*](../en/kicks-part-2-kick-heaven-in-version-7.md.html)*. Traducción al
+español por* [*Pixel Guy*](https://apixelguy.com)
 
-\- Posted November 8th, 2019 by [Pixel
-Guy](https://apixelguy.com "Posts by Pixel Guy")\
-*Artículo original de* [*DEFENSE
-MECHANISM*](kicks-part-2-kick-heaven-in-version-7.html)*. Traducción al
-español por* [*Pixel Guy*](https://apixelguy.com)*.*
-
-¡Bienvenidos de vuelta a *Intense Tech con Defense Mech*! Esta semana
+¡Bienvenidos de vuelta a *Intense Tech*! Esta semana
 continuaremos con la parte dos del tutorial sobre cómo hacer *kicks*
 utilizando LSDj, ¡incluyendo una importante actualización! Al finalizar
 esta lección tendrás un amplio arsenal de técnicas para hacer *kicks*
@@ -15,7 +11,8 @@ del cual podrás elegir. ¡Continúa leyendo para saber más!
 
 ------------------------------------------------------------------------
 
-#### ¡Se aproximan grandes cambios!
+¡Se aproximan grandes cambios!
+-------------------------------------------------
 
 La semana pasada el desarrollador del LSDj, Johan Kotlinski, actualizó
 el programa, ¡de modo que ahora se encuentra en la versión siete! (Al
@@ -25,8 +22,7 @@ funciona con la configuración DRUM del parámetro para el *pitch*; dicho
 parámetro ---P/L/V--- también ha sido renombrado a PITCH para evadir
 confusiones.
 
-![](image.png)\
-***PITCH antes se llamaba P/L/V.***\
+![PITCH antes se llamaba P/L/V](../media/image.png)
 
 Analicemos esta función con un *kick* que haga una transición a la nota
 del bajo. Comenzaré con el *kick* dos octavas por encima de la nota en
@@ -34,7 +30,8 @@ la que quiero que esté el bajo. La *table* que utilizará el *kick* usa
 un comando P rápido seguido de un comando L y un valor de transposición
 de E8 para que la nota se deslice dos octavas hacia abajo.
 
-#### Otros usos de la configuración DRUM
+Otros usos de la configuración DRUM
+-------------------------------------------------
 
 Como mencioné la semana pasada, la configuración DRUM del *pitch* es
 efectiva al momento de crear *snares* o *toms*. Al hacer un *snare*,
@@ -46,7 +43,10 @@ transponer la nota a donde ya he afinado el *snare*. Esto le da al
 siguiente ejemplo también bajo el volumen con comandos E para proveer de
 forma al *decay*.
 
-#### La configuración DRUM en los canales Pulse
+![ ](../media/wavsnare.mp4)
+
+La configuración DRUM en los canales Pulse
+-------------------------------------------------
 
 La configuración DRUM también funciona en los canales Pulse. En el
 siguiente ejemplo he creado un *kick* de onda de pulso, así como un
@@ -60,7 +60,10 @@ Instrument para controlar el *decay*. El *tom* tiene una duración
 inferior, por lo que agregué los comandos P directamente en la *phrase*
 para ajustar el *slide*; así no hay que utilizar una *table*.
 
-#### Percusiones utilizando el *sweep* del *pitch* de hardware en el canal Pulse 1
+![ ](../media/pulsedrum.mp4)
+
+Percusiones utilizando el *sweep* del *pitch* de hardware en el canal Pulse 1
+-------------------------------------------------
 
 El canal Pulse 1 tiene *sweep* para el pitch de hardware, el cual es
 útil para hacer sonidos atonales, y aquellos *blips* y *blops* parecidos
@@ -68,10 +71,13 @@ a los de los videojuegos de antaño (sí, comprendo que el chip de sonido
 del Gameboy es muy bueno para esto). Aunque esta función también se
 puede utilizar para hacer *kicks*, *snares* o *toms*. En el ejemplo de
 abajo utilizo un valor de F4 para el comando S para el *kick* y un valor
-de E3 para el *snare*. Valores similares a este (E) en el comando S
+de `E3` para el *snare*. Valores similares a este (E) en el comando S
 pueden ser utilizados para hacer *toms*.
 
-#### *Kicks* en el canal Noise
+![ ](../media/sweepdrum.mp4)
+
+*Kicks* en el canal Noise
+-------------------------------------------------
 
 Por último pero no menos importante, y a pesar de que no produce los
 sonidos más «elegantes», el canal Noise puede ser usado para generar
@@ -80,13 +86,16 @@ canal Noise hecho por Boy Meets
 Robot](https://www.youtube.com/watch?v=wD7omqjHXmI) se explica el mismo
 a profundidad. A manera de un resumen rápido se podría decir que
 cualquier forma (*shape*) de un instrumento en dicho canal que termine
-en un valor de 0 a 7 producirá un sonido más tonal, lo cual puede ser
+en un valor de `0` a `7` producirá un sonido más tonal, lo cual puede ser
 explotado para crear un sonido más suave para un *kick*. Transponer
 hacia abajo en intervalos de diez bajará la octava en la que se
 encuentre este sonido parecido a la estática y generará una bajada en el
 tono para, así, crear un *kick* en canal Noise.
 
-#### Combinando canales
+![ ](../media/noisekick.mp4)
+
+Combinando canales
+-------------------------------------------------
 
 Cuando utilizamos dos canales para un *kick*, ¡podemos combinar sus
 fuerzas! En el siguiente ejemplo creé un *kick* muy corto utilizando la
@@ -100,7 +109,10 @@ Dansen](https://cyanidedansen.bandcamp.com/track/dox-the-fash-remix-by-defense-m
 (puedes encontrar el archivo de guardado
 [aquí](https://defensemech.com/songs)):
 
+![ ](../media/doxfash.mp4)
+
 ¡Eso es todo en este artículo de dos partes! Regresen el próximo año (me
 tomaré libre el mes próximo) para prender aún más técnicas que utilizar
-el LSDj. ¡Asegúrense de [decirme](mailto:defensem3ch@gmail.com) lo que
-les gustaría aprender! Se despide, DEFENSE MECHANISM.
+el LSDj.
+
+------------------------------------------

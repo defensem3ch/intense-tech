@@ -1,221 +1,226 @@
-Intense Tech with Defense Mech -- LSDj Wave Synth Deep Dive Part 2 {#intense-tech-with-defense-mech-lsdj-wave-synth-deep-dive-part-1}
-==================================================================
+**Intense Tech with Defense Mech – LSDj Wave Synth Deep Dive Part 1**
+-Posted October 11th, 2018 by [DEFENSE MECHANISM](https://defensemech.com) *Note: [traducción al 
+Español por Pixel Guy encontrado 
+aquí](../es/analisis-del-sintetizador-del-canal-wave-en-lsdj-parte-uno.md.html).*
 
-\- Posted November 8th, 2018 by [DEFENSE
-MECHANISM](https://chiptuneswin.com/blog/author/defensemech/ "Posts by DEFENSE MECHANISM")
+Hello, I’m DEFENSE MECHANISM! Welcome to the first installment of Intense Tech, where we’ll
+take an in-depth look at some of the features LSDj. My aim is to impart to you knowledge and
+wisdom to pass on to the following generations of chiptuners, thus creating an army of
+bleepbloopin’ masters!!
 
-Hello, I'm Defense Mechanism and welcome back to Intense Tech! Join in
-as we explore the features of LSDj in depth with the ultimate goal of
-helping you, the reader, level up your understanding of the program!
+This inaugural tutorial will cover what one needs to understand the Wave channel synth!
+Specifically getting into the wave synth parameters of Signal, Filter, Volume, Q, and Cutoff.
 
-In this tutorial we'll continue covering what one needs to understand
-the Wave channel synth! [Last
-time](lsdj-wave-synth-deep-dive-part-1.html) we covered Signal, Volume,
-Filter, Cutoff, and Q. This time we're specifically getting into the
-wave synth parameters of Dist, Phase, Vshift, and Limit. We're going to
-show you how to add some real noisy crunch to your wave sounds! By the
-end you should have a great idea of how to get any kind of sound out of
-the wave channel, from a silky smooth lead to a gnarly crunchy bass.
+-----------------------
 
-------------------------------------------------------------------------
+<center>
 
-In [part 1](lsdj-wave-synth-deep-dive-part-1.html), I talked about how
-different filter settings affect what harmonics are produced in the wave
-channel. As we have seen, the more cycles we have of a waveform in the
-wave frame, the higher the harmonic that will be produced. In fact, the
-number of cycles corresponds to the number of the harmonic that will
-play.
+If you like this article, please check out the corresponding [LSDj Learning Lab video series about 
+the wave channel!](https://www.youtube.com/playlist?list=PLfhdj6Qak_ehuZgnwhiz9akZnTMsDeNpy)
 
-If you've taken a look at the settings on your own or read the LSDj
-manual, you might have found another way to change the number of cycles:
-by changing the Phase.
+<iframe width="560" height="315" style="width: 560px; height: 315px;" src="https://www.youtube.com/embed/videoseries?list=PLfhdj6Qak_ehuZgnwhiz9akZnTMsDeNpy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-The Phase parameter in LSDj compresses the shape of the waveform
-horizontally. When the Phase type is Normal, increasing the Phase value
-above 0 will compress the entire waveform, adding samples at volume 0 at
-the end. In this way, it is analogous to changing [pulse width, aka duty
-cycle](https://en.wikipedia.org/wiki/Duty_cycle). In fact, a common
-technique to get a smoothly modulated pulse lead (commonly associated
-with the C64 SID, for example) is to set the Signal to Square, keep
-Phase type set to Normal, set the start Phase value to 00, and the end
-Phase to 1F (or 1E in version 4).
+</center>
 
-![](normal-phase.gif)\
-*SID lead with Phase Normal*\
+-----------------------
 
-For an interesting vocal-like lead, try this with Triangle instead of
-Square.
+One of the most confusing and possibly intimidating features of LSDj is the Wave channel
+synth. Hopefully after working through this exercise and the next, you’ll not only find that
+it’s easy to use, but once you have a clear idea of how it works, you’ll understand why it’s
+one of the most powerful aspects of LSDj!
 
-If we change the Phase type to Resync, we've just given ourselves
-another way to add new overtones similar to changing the Cutoff of the
-wave. Resync, instead of compressing the waveform once and adding
-0-value samples at the end, repeats the waveform until all 32 samples
-are filled.
+I’ll walk through each parameter in-depth to demystify what’s really going on; but first,
+let’s start with a quick overview of the Game Boy Wave channel itself.
 
-![](resync-phase.gif)\
-\
-(note: in version 4 of LSDj, Phase 1F is usually silent, so this
-waveform would have to be input manually)
+The Wave channel plays a 4-bit, 32-sample waveform. This can be represented by 32 digits in
+hexadecimal `0-F`, as seen on the LSDj Wave screen below.
 
-You can also experiment with Resync2, which like Resync repeats the
-waveform to fill the wave frame, but does not compress it. This normally
-has the effect of lowering the volume, as when you only loop a part of
-the waveform, it typically doesn't reach as high or low as it normally
-would. However, additional harmonics are still created in the resulting
-waveforms.
+![Heads up: `8ECDCCBBAAA999888776665554433231` **WILL** be on the test.](../media/bgb_2018-09-24_11-43-06.png)
 
-![](resync2-phase.gif)\
+What this means is that each sample can only have a volume of one value ranging from 0 through
+15 (`0` through `F` in hexadecimal). Compared to 16-bit audio (the most common recording standard)
+which allows for 65,536 unique volume levels, the Gameboy’s 4-bit audio depth only allows 16
+volume levels! While this may seem like a lot less to work with in comparison,
+that’s OK because it’s part of what gives the Wave channel its characteristically
+crunchy sound.
 
-Up to now, our changes to the waveforms have resulted in a fairly clean
-sound. Overtones have a smooth, clear sound. But what if we really want
-to add some grit? We're gonna have to get down and dirty to make our
-sine wave turn into something like this:
+Let’s begin by taking a look at some basic audio waveforms, as shown on
+  [this graphic from Wikipedia](https://en.wikipedia.org/wiki/Sine_wave#/media/File:Waveforms.svg)
 
-![](nois1-1541522752.gif)\
+![](../media/firefox_2018-09-24_12-03-51.png)
 
-The last frame of the synth above is what pure noise looks like in the
-wave channel. The noisier the waveform gets, the more the overtones are
-combined differently to add more grit. Here's an example of what 16
-different frames of pure noise sound like:
+By the end of this lesson you’ll understand how to make a sine wave. Before we get there,
+first I need to explain some theory behind how a musical note is produced.
 
-![](nois2-1541523664.gif)\
+Sound is made by vibrating air, and each waveform above represents what those vibrations would
+look like if you could see them. You can also visualize them by imagining the way a speaker
+cone moves back and forth when producing sound. The sine wave is the most basic waveform – it
+contains only the pure fundamental frequency of the root note. The other waveforms contain
+other [overtones](https://en.wikipedia.org/wiki/Overtone) (multiples of the
+fundamental frequency). By combining different overtones at different ratios, we can create
+different-sounding waveforms (this is known as changing the “timbre” of the sound itself).
+When you hear the difference between a note played on a violin and the same note played on a
+flute, a lot of the difference in the timbre that you hear results from the mixtures of
+different overtones that are produced in the vibrating air.
 
-So how do we add this noise to our waveforms? One way is by essentially
-adding extra "notches". This can be done manually, like adding some
-extra grit to a normal sine wave.
+To give an example of an overtone, if you multiply a frequency by 2, you get the same pitch
+but 1 octave above. As you increase the multiple by 1, you create the next overtone.
 
-![](sine-grit.gif)\
+Example: A 220 Hz (LSDj A3) – fundamental, aka root note
 
-Dist (Distortion) type also affects wave noise content. Distortion in
-LSDj refers to what happens when the waveform exceeds the available
-dynamic range, that is, what happens when increasing a waveform's Volume
-or Q takes it beyond the maximum volume. As you'll recall, volume is
-represented by the values 0-F. If the peak volume of the signal goes
-higher than F or lower than 0, the Dist type of the waveform dictates
-how LSDj reacts.
+(note names in LSDj correspond to version 6+; for version 4, add 1 octave)
 
-The default Dist type, Clip, chooses to just "clip" those values at 0
-and F. It's as if we just shave the top and the bottom right off. The
-more we increase the volume of our sine wave, the more and more it
-starts to look and sound like a square wave.
+A 220 Hz x 2 = A 440 Hz (LSDj A4) – 1 octave above (1st overtone)
 
-![](clip.gif)\
+A 220 Hz x 3 = E 660 Hz (LSDj E4) – 1 octave + one 5th (2nd overtone)
 
-Remember that a square wave adds extra odd overtones to the sine wave
-sound, so this is one possibility.
+A 220 Hz x 4 = A 880 Hz (LSDj A5) – 2 octaves above (3rd overtone)
 
-The next option, Fold (introduced in version 6), "mirrors" what those
-volumes would be across the top and bottom.
+A 220 Hz x 5 = C# 1100 Hz (LSDj C#5) – 2 octaves + 1 major 3rd (4th overtone)
 
-![](fold.gif)\
+A 220 Hz x 6 = E 1320 Hz (LSDj E5) – 2 octaves + one 5th (6th overtone)
 
-Now, instead of chopping off those components of our sine wave that peak
-over the top and bottom, that "excessive" volume is folded back onto the
-main waveform. Compared to the deep square-like sound of Clip, this is
-much higher and more resonant with upper overtones. It's also quieter
-than Clip because fewer samples are at the very top and bottom of the
-dynamic range. However, you could increase the Volume or Q and let the
-samples fold back and forth multiple times to add more crunch.
+![The first 6 notes in the harmonic series of A 220 Hz](../media/harmonicseries.png)
 
-The last option, Wrap, will carry any loudness past the top and wrap the
-next sample upwards from the bottom, and vice versa. Compared to Clip
-and Fold, it's characterized by a harshness and buzz in the resulting
-sound. It tends to be louder than Fold because it distributes more
-samples evenly throughout the entire dynamic range, although it's
-usually not as loud as Clip.
+The [harmonic series](https://en.wikipedia.org/wiki/Harmonic_series_(music)) of a
+note includes the note at its fundamental root frequency, plus that frequency multiplied by 2,
+3, 4, and so on.
 
-![](wrap.gif)\
+Each multiple of 2 (2, 4, 8, 16, etc) represents octaves of the fundamental frequency.
 
-When you set Dist to Wrap and increase the volume, many sample values
-are wrapped repeatedly since they exceed 0-F many times. This creates
-many instances where samples jump across a large portion of the dynamic
-range. When you increase Volume or Q, you can cause the waveform to wrap
-in unpredictable ways, so it may be difficult to dial in a precise
-sound. You'll ~~just~~ have to experiment and hear how the various upper
-overtones will color the sound, but in general it will sound harsh,
-rich, buzzy, and crunchy.
+Each multiple of 3 (3, 6, 12, etc) represents one 5th above the fundamental frequency (except
+9 and its multiples which represent a major 10th).
 
-To recap what we've learned so far:
+Each multiple of 5 (5, 10, 15) etc. represents a major 3rd above the fundamental.
 
--   If your waveform looks like a sine, square, or triangle wave with 1
-    complete cycle contained entirely within the wave frame, its sound
-    will be clear and smooth. At low octaves it will have plenty of
-    bass.
--   The more repetitions of a wave cycle that are within the wave frame,
-    the higher the frequencies will be produced in the resulting notes.
-    The number of repetitions corresponds to the harmonic of the note in
-    the harmonic series that will be produced.
--   The more noise that occurs within the wave frame, the less clear it
-    will sound, and the more the sound will be colored by the upper
-    overtones, giving it a buzzier, ringier tone. At low octaves it will
-    have less emphasized bass and a harsher, rougher, crunchier sound.
--   Ways of adding higher frequencies include manually adding "notches"
-    into the waveform, setting higher Cutoff values and increasing the Q
-    for emphasis, changing the Phase type and increasing the values, and
-    adding Dist of different types while increasing the Volume or Q.
+Some odd-numbered multiples including 7 and above don’t match traditional notes, for example 7
+is kind of an out-of-tune minor 7th, or 11 which is an out-of-tune flat 5th.
 
-Alright, so we've got a really noisy waveform! Now what? Maybe it's TOO
-noisy! What if we like the sound of it, but we want to tame it a bit
-while still keeping its character mostly intact?
+(Even the major 3rds in the harmonic series are tuned slightly differently than most of our
+modern tuning, but it should be close enough that it will make sense to your ears.)
 
-I'm so glad you asked! Another new feature added in version 6 is the
-ability to Limit the volume AFTER the initial Volume, Cutoff, Q, and
-Phase are applied. The value applied in Limit restricts the samples to a
-volume range, for example setting Limit to "F" allows all volumes 0
-through F, but setting Limit to "5" only allows volumes 5 through A (10
-in hexadecimal), so values that would reach below 5 or above A are kept
-constrained within that range according to the current Dist type.
+The default waveform in LSDj is a
+[sawtooth wave](https://en.wikipedia.org/wiki/Sawtooth_wave), which is created when
+sine waves of the all notes in the harmonic series are combined together.
 
-This is an incredibly helpful feature, because as we have seen, it's
-easy to reach the maximum available dynamic range in the Wave screen
-even if our Volume values are set very low. Additionally, the Game Boy
-doesn't help us much, because it only allows 4 hardware volumes in the
-Wave channel: 100%, 50%, 25%, and 0% (off). When we are Clipping or
-Wrapping our waveforms and constantly reaching volume range all the way
-from 0-F, the wave channel has the unfortunate tendency of often being
-too loud at 100% volume but too quiet at 25% or 50%. Thankfully, now we
-can still choose to distort our waveform to get some richness with added
-overtones, but with a much fuller control of range of volume. To help us
-even more, we have the ability to choose one volume range at the Start
-point and another volume range at the End point. This will let us
-smoothly transition from loud to quiet or vice versa, as shown here with
-Limit starting at F and ending at 4.
+![One complete cycle of a sawtooth wave generated in 
+Audacity](../media/audacity_2018-09-24_11-42-38.png)
 
-![](limit.gif)
+![One complete cycle of a sawtooth wave generated in LSDj](../media/bgb_2018-09-24_11-43-06-1.png)
 
-To close, we have the Vshift, or Vertical Shift, feature. This parameter
-lets us shift the samples in the waveform upwards. In previous versions
-of LSDj, Vshift functioned similarly to Wrap distortion such that as the
-waveform shifts vertically, after it reaches F it wraps around starting
-again at 0. This made it possible to choose Clip Dist, increase volume,
-and still add wrapping with a change of Vshift to introduce some harsher
-sounds. Like Wrap, increasing Vshift often results in unpredictable
-changes, but it can be fun to experiment with.
+Listen to this audio example of the sawtooth wave in Audacity, followed by sawtooth wave in
+LSDj at 440 Hz:
 
-In version 6 of LSDj, Vshift follows the current Dist setting. With
-Clip, Vshift will squash the waveform towards the ceiling as the value
-increases. This, like Fold and Resync2, has the effect of making the
-waveform quieter.
+![ ](../media/sawtooth.mp3)
 
-![](vshift1.gif)\
+![(waveform output side-by-side for comparison)](../media/audacity_2018-09-24_11-58-07.png)
 
-Set to Fold, it will again mirror across the top. With Vshift set to FF,
-the original wave will be inverted.
+You’ll hear a bit of difference, but all in all the LSDj version sounds surprisingly faithful
+to the higher quality audio.
 
-![](vshift2.gif)\
+This sawtooth wave is represented as ![](../media/bgb_2018-09-24_13-37-35.png) in the LSDj
+Synth screen.
 
-Set to Wrap, it will wrap around from the bottom.
+The [square wave](https://en.wikipedia.org/wiki/Square_wave)
+![](../media/bgb_2018-09-24_13-37-55.png) is constructed by combining sine waves of the
+harmonic series, but only the odd overtones. Most of us probably know the distinct bloopy
+sound of a square wave – this waveform can also be made in the pulse channels set to 50% duty
+cycle.
 
-![](vshift3.gif)\
+The [triangle wave](https://en.wikipedia.org/wiki/Triangle_wave)
+![](../media/bgb_2018-09-24_13-38-14.png) (note: don’t be fooled that the triangle icon looks
+like a sine wave) is constructed the same as the square wave, using only odd harmonics, but
+decreasing further in volume the higher they go (moreso than those of a square wave). This is
+a good sound for a very deep bass, as you might be familiar with if you have heard the NES’
+4-bit triangle channel.
 
-Hopefully by now you've gotten a much better grip of how the Wave Synth
-works in LSDj! I hope this has helped you to fearlessly explore all
-kinds of options and gives you a good idea of what kind of parameters
-you need to adjust when looking for a particular sound, but also I hope
-that it helps you experiment to find a new sound that you haven't heard
-before! See you next time!
+It may not seem possible to create a sine wave in LSDj given that the “Signal” parameter has
+only these 3 options, and Sine is conspicuously absent. However, because each of these
+waveforms is fundamentally constructed from sine waves, I can show you how to extract a sine
+wave from any of these options.
 
-[DEFENSE MECHANISM](https://defensemech.com), signing off!
+Conveniently, the next parameter in the Synth screen, “Filter”, is just the tool we need.
 
-*Note: traducción al Español por Pixel\_Guy [encontrado
-aquí](https://chiptuneswin.com/blog/intense-tech-con-defense-mech-analisis-del-sintetizador-del-canal-wave-en-lsdj-parte-dos).*
+With “Filter”, we have 4 options: Lowpass (Lowp), Highpass (Highp), Bandpass (Bandp), and
+Allpass (Allp).
+
+If you’re familiar with a traditional filter on an analog synth or digital plugin you might
+understand these. If not, you can think of the filter in LSDj as allowing you to choose which
+harmonics in the sound you would like to produce in your resulting waveform. The frequency
+that the filter acts on is selected by the “Cutoff” parameter.
+
+With Lowpass, only the low harmonics of the Cutoff and below will “pass through” the filter,
+meaning your fundamental frequency is the lowest tone, but you can expand to include up to the
+highest harmonics (in LSDj that’s up to 15 overtones, in theory). With Highpass, only the
+highest harmonics of the Cutoff and above will pass through, but you can expand to the lowest.
+With Bandpass, only the range of harmonics specified by Cutoff will pass through. And with
+Allpass, all harmonics will pass through, but the phases of some harmonics will be shifted
+where the Cutoff is emphasized, which produces different timbres as a result.
+
+That dry explanation aside, next let’s take a look at what happens when we set our lowpass
+filter cutoff to `10`. Since this is `10` (16 in hexadecimal) out of a possible `FF` (255 in
+hexidecimal), we’ve set our filter to allow only the lowest note in the harmonic series, the
+fundamental. Remember that if you want to hear only the first waveform of the synth, set Play
+to Manual in the Wave Instrument screen.
+
+![A wild sine shape appears!](../media/bgb_2018-09-24_12-58-37.png)
+
+We can see that it looks a little bit squashed, so let’s increase the Q, also known as
+resonance. This parameter will give us a boost in the volume wherever our filter cutoff is
+set, while leaving the rest of the harmonics at the same volume. Let’s set Q to `1` to boost the
+volume of the fundamental only and see what we end up with:
+
+![](../media/bgb_2018-09-24_12-55-16.png)
+
+It’s somewhere in between a sine and a squashed triangle. Let’s lower the Volume to `08` and
+raise Q to `3`. The Volume parameter adjusts the overall volume of the Signal before the Filter
+and Q are applied.
+
+![](../media/bgb_2018-09-24_12-56-05.png)
+
+That’s looking pretty close to a sine wave, I’d say! Feel free to experiment with different Q,
+Cutoff, and Volume values and adjust them to your liking.
+
+Playing notes at low octaves with this waveform creates the lowest, bassiest possible sound
+you can get in the Wave channel. It contains the fewest overtones possible, making it
+perfectly suitable for a low kick or sub-bass. In a perfectly ideal situation, a sine wave
+contains no overtones at all, only the fundamental frequency. However, because the wave
+channel bit depth only gives us 16 volume values, we can only roughly approximate a sine wave,
+and as a result some additional overtones creep into the sound.
+
+Finally to wrap up the lesson, I want to show that every multiple of `10` of the “Cutoff”
+actually represents 1 overtone of the harmonic series. This becomes even clearer when we
+change “Lowpass” to “Bandpass” and raise our Volume to `20`. Notice that if you set the Cutoff
+to `20`, you’ll hear the overtone 1 octave above. If you set the Cutoff to `30`, you’ll hear the
+overtone 1 octave + one 5th above. If you set Cutoff to `40`, you’ll hear the overtone 2
+octaves above, and so on. As you raise your filter cutoff, you can experiment with increasing
+the Q value to further emphasize the overtone you’ve selected – the higher your filter cutoff,
+the lower in volume the resulting overtone will be (this is a natural feature of how a
+sawtooth wave is produced).
+
+![](../media/bgb_2018-09-25_14-14-37.png)
+
+And remember if you change your waveform to square or triangle, there are fewer overtones in
+those waveforms, so it may seem as if some of the octaves or other overtones are missing!
+
+Cutoff at `20`:
+
+![](../media/bgb_2018-09-24_13-12-35.png)
+
+![ ](../media/cutoff20.mp3)
+
+Cutoff at `30`:
+
+![](../media/bgb_2018-09-24_13-12-50.png)
+
+![ ](../media/cutoff30.mp3)
+
+Cutoff at `40`:
+
+![](../media/bgb_2018-09-24_13-13-03.png)
+
+![ ](../media/cutoff40.mp3)
+
+Are you seeing any pattern in the resulting waveforms as we increase filter cutoff? Keep your
+observations in mind, as we’ll use them in the next installment!
+

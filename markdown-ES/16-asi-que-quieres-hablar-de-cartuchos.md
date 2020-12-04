@@ -1,13 +1,11 @@
-Intense tech con Defense Mech -- ¿Así que quieres hablar de cartuchos? {#así-que-quieres-hablar-de-cartuchos}
-======================================================================
-
-\- Posted May 21st, 2020 by [Pixel
-Guy](https://apixelguy.com "Posts by Pixel Guy")\
+**Intense tech con Defense Mech -- ¿Así que quieres hablar de cartuchos?**
+- Posted May 21st, 2020 by [Pixel
+Guy](https://apixelguy.com)
 *Artículo original de [DEFENSE
-MECHANISM](so-you-want-a-cartridge-family.html). Traducción al español
+MECHANISM](../en/16-so-you-want-a-cartridge-family.md.html). Traducción al español
 por* [*Pixel Guy*](https://apixelguy.com)*.*
 
-¡Bienvenidos de vuelta a *Intense tech con Defense Mech*! Aunque
+¡Bienvenidos de vuelta a *Intense tech*! Aunque
 normalmente escribo sobre técnicas utilizables en el LSDj, he recibido
 muchas preguntas sobre qué tipo de cartuchos recomiendo. El mercado de
 los cartuchos flash para Gameboy tiende a cambiar cada cierta cantidad
@@ -154,6 +152,4 @@ utiliza una memoria que no depende de la batería, lo que quiere decir
 que nunca tendrás que preocuparte por perder un archivo de guardado a
 causa de una batería muerta en el cartucho. ¡Lo que es genial!
 
-Espero que encuentren esto útil y si encuentran algún cartucho que no
-haya mencionado, por favor, [DEFENSE
-MECHANISM](mailto:defensem3ch@gmail.com).
+------------------------------------------

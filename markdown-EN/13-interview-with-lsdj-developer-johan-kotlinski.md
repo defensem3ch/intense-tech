@@ -1,10 +1,6 @@
-Intense Tech with Defense Mech: Interview with LSDj Developer Johan Kotlinski!
-==============================================================================
-
-\- Posted February 20th, 2020 by [DEFENSE
-MECHANISM](https://defensemech.com "Posts by DEFENSE MECHANISM")
-
-<div>
+**Intense Tech with Defense Mech: Interview with LSDj Developer Johan Kotlinski!**
+- Posted February 20th, 2020 by [DEFENSE
+MECHANISM](https://defensemech.com) *Note: traducción al Español [por Pixel Guy encontrado aquí](../es/13-entrevista-con-el-desarrollador-del-lsdj-johan-kotlinski.md.html).*
 
 Welcome back to Intense Tech! This time I'm really excited to share with
 you an interview with Johan Kotlinski, the developer of LSDj! Let's dive
@@ -12,28 +8,34 @@ right in!
 
 ------------------------------------------------------------------------
 
+<div class="interview">
 **DEFENSE MECH: Hi Johan! Thanks for agreeing to do this interview with
 me for Intense Tech!**
+</div>
 
 Johan Kotlinski: Hi! Thank you.
 
-**You know, the Game Boy turned 30 years old in 2019, and it still
+<div class="interview">
+**DM: You know, the Game Boy turned 30 years old in 2019, and it still
 remains a memorable piece of hardware to a lot of us gamers and
-musicians who played it in our youth.**\
-\
+musicians who played it in our youth.**
+
 **Why do you think the Game Boy was the platform that inspired you to
 write a program for music composition?**
+</div>
 
-I think it's mostly timing and luck. I had been interested in making my
+JK: I think it's mostly timing and luck. I had been interested in making my
 own music editor for some time, and so it just happened that Game Boy
 Color appeared at the right time as a fun and interesting platform. You
 see, in 2000 it was not that "retro" but rather the most popular
 handheld, even if the architecture was dated already then.
 
-**Did you have any prior expertise in developing music software, or
+<div class="interview">
+**DM: Did you have any prior expertise in developing music software, or
 software for game consoles?**
+</div>
 
-Not really! I had made a few toy music programs, but Little Sound Dj was
+JK: Not really! I had made a few toy music programs, but Little Sound Dj was
 probably the first thing I worked on that went over a thousand lines
 \[of code\]. Also, I had never written assembly code before, so there
 was a lot of things to learn. This is not to say I was an absolute
@@ -41,15 +43,17 @@ beginner. I had been programming since I was twelve or so. I just did
 not have any experience in writing a real program that people actually
 use.
 
-**Game Boy music has really become popular as a platform among chiptune
+<div class="interview">
+**DM: Game Boy music has really become popular as a platform among chiptune
 artists -- it's almost always the case that if a chiptune show is
 happening, there is going to be at least one artist, if not several
 more, performing on a Game Boy with LSDj.** **In some ways, it's hard to
-imagine what the chiptune scene would be today without it.**\
-\
-**What was your experience with chipmusic before LSDj?**
+imagine what the chiptune scene would be today without it.**
 
-Like many others in Sweden, I grew up with Commodore 64 and Amiga and so
+**What was your experience with chipmusic before LSDj?**
+</div>
+
+JK: Like many others in Sweden, I grew up with Commodore 64 and Amiga and so
 got accustomed to these sounds early on. Early 90s, I learned Protracker
 and shared .mod files on bulletin board systems, and made friends over
 FidoNet who shared my taste in music; mostly the techno/house/IDM stuff
@@ -106,38 +110,44 @@ for "rolemodel" on [micromusic.net](https://micromusic.net), or
 [8bitpeoples
 8BP047](http://www.8bitpeoples.com/products/520230-role-model-a-new-fragrance).
 
-**Ableton Live was released in October 2001, and the LSDj changelog
+<div class="interview">
+**DM: Ableton Live was released in October 2001, and the LSDj changelog
 shows its own "Live mode" was implemented in January 2001 -- looks like
 maybe they owe you some credit? I'm not familiar with the entire history
 of trackers, but it seems like the idea to make the tracker more than
 simply a tool for linear composition, to go beyond that and to offer
-different possibilities during live performance, is unique to LSDj.**\
-\
+different possibilities during live performance, is unique to LSDj.**
+
 **Do you remember what sparked the idea to want to be able to cue
 different song sections on the fly?**
+</div>
 
-It is very flattering to think otherwise, but for sure Live Mode is from
+JK: It is very flattering to think otherwise, but for sure Live Mode is from
 Ableton Live and not the other way around. If I remember right, Tobi-Wan
 of Puss was a beta tester and showed me how it worked. Incidentally, I
 lived in Berlin October 2001, just a few blocks away from Ableton
 offices. Maybe I even went to the 1.0 party. My memory is a bit foggy,
 so I can't tell for sure.
 
-**Later this year, it will be LSDj's 20th birthday! That's pretty neat
+<div class="interview">
+**DM: Later this year, it will be LSDj's 20th birthday! That's pretty neat
 since not many trackers or other software for legacy hardware are being
-actively developed over so many years.**\
-\
-**What has inspired you to keep developing LSDj?**
+actively developed over so many years.**
 
-Certainly that people keep on using and caring about it! Otherwise, I do
+**What has inspired you to keep developing LSDj?**
+</div>
+
+JK: Certainly that people keep on using and caring about it! Otherwise, I do
 not think I would put any effort into it at all. I think now is really a
 good time. Good music is being made and I get nice ideas and help from
 the community. That makes it fun. I like staying somewhat connected with
 the chip music scene that I love so much.
 
-**When you think about LSDj's development, what are you most proud of?**
+<div class="interview">
+**DM: When you think about LSDj's development, what are you most proud of?**
+</div>
 
-Overall I'm not too proud. Most of the time I am very lazy, and there
+JK: Overall I'm not too proud. Most of the time I am very lazy, and there
 has been many bad bugs and terrible design decisions over the years. I
 am just grateful that so many kept the patience to this point, including
 myself.
@@ -176,17 +186,18 @@ spot on and things harmonize so much better than they used to. It is a
 bit unfortunate that I had to break everyone's songs, but in Sweden
 there is this saying, "There are no shortcuts to the perfect sound"...
 
-**When I think about LSDj, my mind cannot really comprehend how it would
+<div class="interview">
+**DM: When I think about LSDj, my mind cannot really comprehend how it would
 have been possible to pack it full of so many features, like the ability
 to sequence channels at independent grooves, the wavetable synthesizer,
 and the dual-channel sample playback. It seems like every month that
 goes by, someone has discovered a new technique or invented a new
-sound.\
-**\
+sound.**
 **What do you think is next for the sound of the Game Boy and for
 LSDj?**
+</div>
 
-I think the near future is pretty clear. At some point, what went in
+JK: I think the near future is pretty clear. At some point, what went in
 over the last months will become the new stable v8, meaning e.g.
 accurate vibrato, de-clicked WAV playback, slowed-down C command,
 probability sequencing, higher max tempo, wave finetune, optimized
@@ -206,18 +217,9 @@ suggestions [by e-mail](mailto:info@littlesounddj.com) or [add them to
 the Wiki](https://littlesounddj.fandom.com/wiki/LSDj_Wishlist). This
 input really helps when I decide what to do next.
 
-**Thanks again!**
-
-Thank you!
-
-------------------------------------------------------------------------
-
-I hope you enjoyed hearing from the creator of LSDj! If you haven't
-gotten a copy yet, now is a great time to pick one up at
-[littlesounddj.com](https://www.littlesounddj.com). Until next time,
-this is [DEFENSE MECHANISM](https://defensemech.com), signing off!
-
-*Note: traducción al Español [por Pixel Guy encontrado
-aquí](entrevista-con-el-desarrollador-del-lsdj-johan-kotlinski.html).*
-
+<div class="interview">
+**DM: Thanks again!**
 </div>
+
+JK: Thank you!
+

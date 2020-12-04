@@ -1,20 +1,18 @@
-Intense Tech con Defense Mech -- Análisis del sintetizador del canal Wave en LSDj. Parte dos {#análisis-del-sintetizador-del-canal-wave-en-lsdj.-parte-dos}
-============================================================================================
-
-\- Posted November 9th, 2018 by [Pixel
-Guy](https://apixelguy.com "Posts by Pixel Guy")\
+**Intense Tech con Defense Mech -- Análisis del sintetizador del canal Wave en LSDj. Parte dos**
+- Posted November 9th, 2018 by [Pixel
+Guy](https://apixelguy.com)
 *Artículo Original de [DEFENSE
-MECHANISM](lsdj-wave-synth-deep-dive-part-2/). Traducción al Español por
+MECHANISM](../en/02-lsdj-wave-synth-deep-dive-part-2.md.html). Traducción al Español por
 [Pixel Guy](https://apixelguy.com).*
 
-Hola, soy Defense Mechanism, ¡bienvenidos de nueva cuenta a *Intense
+Hola, soy DEFENSE MECHANISM, ¡bienvenidos de nueva cuenta a *Intense
 Tech*! Únanse a mí a medida que exploramos a profundidad las funciones
 del LSDj con el fin de ayudarte a ti, lector, a aumentar tu
 entendimiento del programa.
 
 ¡En este tutorial continuaremos cubriendo lo que se necesita para
 entender el sintetizador del canal Wave! [La vez
-pasada](ganalisis-del-sintetizador-del-canal-wave-en-lsdj-parte-uno.html/)
+pasada](01-analisis-del-sintetizador-del-canal-wave-en-lsdj-parte-uno.md.html)
 vimos los parámetros Signal, Volume, Filter, Cutoff y Q. En esta ocasión
 veremos específicamente los parámetros de Dist, Phase, Vshift y Limit.
 ¡Te mostraré cómo añadir un poco de esa cualidad crujiente
@@ -26,7 +24,7 @@ enigmático y crujiente.
 ------------------------------------------------------------------------
 
 En la [primera
-parte](analisis-del-sintetizador-del-canal-wave-en-lsdj-parte-uno.html)
+parte](01-analisis-del-sintetizador-del-canal-wave-en-lsdj-parte-uno.md.html)
 hablé sobre cómo usar diferentes configuraciones en el filtro afecta a
 los armónicos que se producen en el canal Wave. Cómo ya hemos visto,
 entre más ciclos tenga una forma de onda en el cuadro de onda (pantalla
@@ -48,8 +46,9 @@ técnica común para conseguir *leads* de onda de pulso modulados
 Signal a Square, mantener la configuración de Phase en Normal, poner el
 valor inicial de Phrase a 00 y el de final a 1F (o 1E en la versión 4).
 
-![](normal-phase.gif)\
-*Lead SID con el parámetro de Phase en Normal.*
+![Lead SID con el parámetro de Phase en Normal.](../media/normal-phase.gif)
+
+![ ](../media/normal-phase.mp3)
 
 Para conseguir un *lead* que se asemeje a una voz, intenta esto con
 Signal ajustado a Triangle en lugar de Square.
@@ -60,10 +59,10 @@ onda. Lo que hace Resync es que, en lugar de comprimir la forma de onda
 una vez y añadir *samples* con valor de 0 al final, repite la forma de
 onda hasta que los 32 espacios para *samples* están llenos.
 
-![](resync-phase.gif)
+![Nota: en la versión 4 de LSDj, Phase 1F es usualmente silencio, por lo
+que este espacio tendría que ser llenado manualmente.](../media/resync-phase.gif)
 
-(Nota: en la versión 4 de LSDj, Phase 1F es usualmente silencio, por lo
-que este espacio tendría que ser llenado manualmente).
+![ ](../media/resync-phase.mp3)
 
 También puedes experimentar con Resync2 que, como Resync, repite la
 forma de onda para llenar el cuadro de onda, pero no la comprime. Esto
@@ -73,7 +72,9 @@ llega tan alto o tan bajo como bien podría hacerlo. Sin embargo, la
 pérdida de volumen complementa armónicos adicionales compresos en la
 forma de onda.
 
-![](resync2-phase.gif)
+![](../media/resync2-phase.gif)
+
+![ ](../media/resync2-phase.mp3)
 
 Hasta ahora, los cambios en las formas de onda han resultado en un
 sonido bastante limpio. Los armónicos tienen un sonido suave y claro,
@@ -81,21 +82,27 @@ pero ¿y si realmente quisiéramos añadir un poco de suciedad? Tendríamos
 que bajar y ensuciarnos un poco para transformar a nuestra onda senoidal
 en algo como esto:
 
-![](nois1-1541522752.gif)
+![](../media/nois1-1541522752.gif)
+
+![ ](../media/nois1-1541522752.mp3)
 
 Ese último cuadro del sintetizador mostrado arriba es como se ve el
 Noise puro en el canal Wave. Entre más difusa se ve la forma de onda,
 más armónicos son combinados de manera diferente para añadir más
 suciedad. Aquí hay un ejemplo de cómo suenan 16 cuadros de Noise puro.
 
-![](nois2-1541523664.gif)
+![](../media/nois2-1541523664.gif)
+
+![ ](../media/nois2-1541523664.mp3)
 
 Entonces, ¿cómo añadir todo esto a nuestras formas de onda? Una manera
 de hacerlo es, en esencia, añadir algunos «puntos» extra. Estos se
 pueden agregar de forma manual, como al poner un poco de polvo en una
 onda senoidal normal.
 
-![](sine-grit.gif)
+![](../media/sine-grit.gif)
+
+![ ](../media/sine-grit2.mp3)
 
 El parámetro de Dist (Distorsión) también afecta el contenido de
 suciedad en la onda. El término distorsión en LSDj se refiere a lo que
@@ -111,7 +118,9 @@ valores en 0 y F. Es como si solo cortáramos la punta y el fondo. Entre
 más incrementemos el volumen de nuestra onda senoidal, más comenzará a
 sonar como una onda cuadrada.
 
-![](clip.gif)
+![](../media/clip.gif)
+
+![ ](../media/clip.mp3)
 
 Recuerda que una onda cuadrada añade algunos armónicos un tanto extraños
 al sonido de una onda senoidal, por lo que esta es una posibilidad.
@@ -120,7 +129,9 @@ La siguiente opción, Fold (la cual fue introducida en la versión 6),
 «refleja» lo que esos parámetros de volumen podrían ser en la punta y en
 el fondo.
 
-![](fold.gif)
+![](../media/fold.gif)
+
+![ ](../media/fold.mp3)
 
 Ahora, en lugar de cortar esos componentes de nuestra onda senoidal que
 llegan a los límites superior e inferior, los excedentes de volumen son
@@ -139,7 +150,9 @@ más alto que Fold, debido a que distribuye más samples de manera
 uniforme a través de todo el rango dinámico, aunque su volumen no es tan
 alto como el de Clip.
 
-![](wrap.gif)
+![](../media/wrap.gif)
+
+![ ](../media/wrap.mp3)
 
 Cuando se ajusta Dist en Wrap y se incrementa el volumen, muchos de los
 volúmenes de *samples* son puestos de forma repetida, ya que se exceden
@@ -205,7 +218,9 @@ permitirá hacer transiciones más suaves entre volúmenes altos y bajos y
 viceversa; como se muestra a continuación, con Limit iniciando en F y
 terminando en 4.
 
-![](limit.gif)
+![](../media/limit.gif)
+
+![ ](../media/limit.mp3)
 
 Para terminar tenemos la función de Vshift, o *Vertical shift*. Este
 parámetro nos permitirá poner los *samples* de la forma de onda  de
@@ -224,24 +239,29 @@ onda contra el tope a medida que su valor se incremente. Esto, al igual
 que Fold y Resync2, tiene el efecto de hacer que la forma de onda tenga
 un volumen más bajo.
 
-![](vshift1.gif)
+![](../media/vshift1.gif)
+
+![ ](../media/vshift1.mp3)
 
 Al mover la configuración a Fold, comenzará a reflejarse de nueva cuenta
 a través del límite. Con Vshift ajustado a FF, la onda original será
 invertida.
 
-![](vshift2.gif)
+![](../media/vshift2.gif)
+
+![ ](../media/vshift2.mp3)
 
 Ajustado a Wrap, se reincorporará desde el fondo.
 
-![](vshift3.gif)
+![](../media/vshift3.gif)
+
+![ ](../media/vshift3.mp3)
 
 ¡Con suerte ahora tienes una mejor idea de cómo funciona el sintetizador
 del canal Wave en LSDj! Espero que esto te haya ayudado a explorar sin
 miedo todos los tipos de opciones que hay y te dé un concepto de qué
 tipo de parámetros necesitas ajustar cuando busques conseguir un sonido
 determinado. ¡Aunque también espero que esta clase experimentación te
-ayude a encontrar un sonido que no hayas escuchado antes! ¡Nos vemos la
-próxima!
+ayude a encontrar un sonido que no hayas escuchado antes!
 
-Se despide, [DEFENSE MECHANISM](https://defensemech.com/).
+------------------------------------------

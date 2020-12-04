@@ -1,7 +1,5 @@
 **Intense Tech with Defense Mech – The Joys of Noise!**
--Posted November 5, 2020 by [DEFENSE MECHANISM](https://defensemech.com) *Note: traducción al 
-Español [por Pixel Guy encontrado 
-aquí](https://defensemech.com/intense-tech/las-alegrias-del-ruido.md.html).*
+-Posted November 5, 2020 by [DEFENSE MECHANISM](https://defensemech.com) *Note: [traducción al Español por Pixel Guy encontrado aquí](../es/17-las-alegrias-del-ruido.md.html).*
 
 Hello and welcome to another edition of Intense Tech! This time, we'll be delving into the 
 intricacies of the noise channel and discovering what's possible, aiming to grow our arsenal of 
@@ -58,7 +56,7 @@ result is that this produces more tonal, ringing, metallic tones. Long-loop mode
 waveform to the full length, resulting in a sound that is less pitched and more akin to white noise.  
 We can illustrate this by sweeping through the noise shapes of `CF` to `C0`:
 
-![Playing shapes `CF` through `C0`](noise-sweep-1604523198.mp4)
+![Playing shapes `CF` through `C0`](../media/noise-sweep.mp4)
 
 In contrast to the wave synth where sounds are constructed by multiplying the base frequency by 
 whole numbers to generate the harmonic series, the noise channel notes generate the *negative* 
@@ -66,7 +64,7 @@ harmonic series, which results from dividing the frequency by whole numbers. So,
 is near the frequency of a C, we can see what notes result when that frequency is divided by each 
 number:
 
-![The available pitches in short-loop mode are not exact, but they sound the closest to C, F, A♭, and D.](negative-harmonic-series.png)
+![The available pitches in short-loop mode are not exact, but they sound the closest to C, F, A♭, and D.](../media/negative-harmonic-series.png)
 
 One excellent example of using short-loop mode to generate tonal pitches is this demo by 
 [they/them](https://theythemmusic.bandcamp.com/), which only uses the noise channel:
@@ -109,7 +107,7 @@ switch between long-loop and short-loop modes, it's still sometimes necessary to
 with S commands when you want to sweep through the shapes smoothly. Here are a couple examples of 
 how to do that using tables to sweep smoothly down and up:
 
-![Smoothly sweeping through the noise shapes](custom-sweep-1604589887.mp4)
+![Smoothly sweeping through the noise shapes](../media/custom-sweep.mp4)
 
 Working With The Quirks
 -----------------------
@@ -131,7 +129,7 @@ Sleep on Z](https://defensemech.com/intense-tech/dont-sleep-on-z-feat-hypnogram.
 randomizes each digit independently, so this allows us to control the variations to be within a 
 certain loop mode in a certain octave, for example. But don't be afraid to go all out!
 
-![](noise-crash-1604582892.mp4)
+![](../media/noise-crash.mp4)
 
 <div class="fig">In this example, Z can add 1 to the first digit 4 times, meaning the highest digit 
 possible will be F. If it were to exceed F then it would wrap around to 0, which is silent. In order 
@@ -148,7 +146,7 @@ are busy, but you still need a kick! So after thinking about how the noise chann
 rethinking how I make noise kicks. As always, this is just one example of what a noise kick can look 
 like. After explaining my methods here, I hope you're able to apply them in your own way too!
 
-![](noise-kick-1604585213.mp4)
+![](../media/noise-kick.mp4)
 
 <div class="fig">This example starts by slowing down the table so you can see and hear how the kick 
 sounds as the table advances on each line. I'm starting with a base noise shape of `95`, but the 
@@ -174,7 +172,7 @@ command, the tempo of the song (which controls the length of each tick), and the
 You can also use `R80` through `R8F`, the super-fast retrig, which is not affected by song tempo or 
 LENGTH.  Here's a video that demonstrates a couple of examples: 
 
-![](noise-retrig-1604592926.mp4)
+![](../media/noise-retrig.mp4)
 
 Putting it all together
 -----------------------
@@ -193,25 +191,8 @@ SAV**](https://defensemech.com/intense-tech/dotexe-NOIZE_JAMS.sav) <-- </span></
 Please also support .exe by [buying his album on 
 Bandcamp!](https://dotexechiptune.bandcamp.com/album/jams-exe)
 
-------------------------------------------
-
-I hope you enjoyed this tour through the noise channel! Thanks to all my patrons for their support.  
-If you'd like to offer support, please consider [joining me on 
-Patreon](https://patreon.com/defensem3ch).  It means a lot and it helps me continue to make this 
-content, pay for translations, and get your input on what kinds of articles to write next!  <center>
-  <p>
-    <a href="https://patreon.com/defensem3ch"><img src="../patreon.png" alt="Patreon" /></a       
-    ><a href="https://www.paypal.com/donate?hosted_button_id=XNGKRVMEPMN36"
-    ><img src="../paypal.jpg" alt="Paypal"
-    /></a>
-  </p>
+<center>
+<iframe style="border: 0; width: 350px; height: 470px;" 
+src="https://bandcamp.com/EmbeddedPlayer/album=3256814611/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" 
+seamless><a href="https://dotexechiptune.bandcamp.com/album/jams-exe">JAMS.exe by .exe</a></iframe>
 </center>
-Thanks again for reading, and until next time, this is [DEFENSE MECHANISM](https://defensemech.com), 
-signing off!
-
-<!-- Markdeep: --><style 
-class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script 
-src="https://morgan3d.github.io/markdeep/latest/markdeep.min.js" 
-charset="utf-8"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible");window.markdeepOptions 
-= {tocStyle: "none"};</script>
-</html>

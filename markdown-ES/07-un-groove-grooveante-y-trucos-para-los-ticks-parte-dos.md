@@ -1,13 +1,11 @@
-Intense Tech con Defense Mech -- Un groove grooveante y trucos para los ticks. Parte dos {#un-groove-grooveante-y-trucos-para-los-ticks.-parte-dos}
-========================================================================================
-
-\- Posted May 21st, 2019 by [Pixel
-Guy](https://apixelguy.com "Posts by Pixel Guy")\
+**Intense Tech con Defense Mech -- Un groove grooveante y trucos para los ticks. Parte dos**
+- Posted May 21st, 2019 by [Pixel
+Guy](https://apixelguy.com)
 *Artículo Original de [DEFENSE
-MECHANISM](groovy-groove-and-tick-tricks-part-2.html). Traducción al
+MECHANISM](../en/07-groovy-groove-and-tick-tricks-part-2.md.html). Traducción al
 Español por [Pixel Guy](https://apixelguy.com).*
 
-¡Bienvenidos una vez más a *Intense Tech con Defense Mech*! En esta
+¡Bienvenidos una vez más a *Intense Tech*! En esta
 ocasión continuaremos explorando los *grooves*. Una vez que hayas leído
 esta lección deberás de tener algunos trucos extra bajo la manga para
 hacer el *groove* de tus canciones aún más intenso.
@@ -28,27 +26,29 @@ veces que saltará y el segundo dígito especifica hacia dónde lo hará.
 También recuerda que cada comando Groove es ajustado al número de
 *ticks* que cada línea durará.
 
-\
-***Combinar comandos Hop y Groove puede llevarnos a obtener sonidos
-bastante dramáticos.***
+![Combinar comandos Hop y Groove puede llevarnos a obtener sonidos bastante dramáticos.](../media/zenarchytable.mp4)
 
 Otro truco que aprendí de Zef; es que puedes, de hecho, usar *grooves*
 para escribir en otra signatura de compás, como 3/4, sin utilizar un
 comando Hop.
 
-![](zef.jpg)
+<center>
+[<img src="../media/zef.jpg" />](https://twitter.com/chrislpenner/status/306414658603077633)
+</center>
 
-Traducción del *tweet*: «¿(Estás tratando de) escribir en 3/4 o 6/8 en
-LSDj? Ajusta Groove 00 a (una duración de) seis (*ticks*) de la línea 0
-a la A; ajusta B a 2 y C, D, E y F a 1. ¡Ahora solo ignora de la línea C
-a la F en la pantalla Phrase! \#LSDJTips»
+<div class="fig">Traducción del *tweet*: «¿(Estás tratando de) escribir en 3/4 o 6/8 en
+LSDj? Ajusta Groove `00` a (una duración de) `6` (*ticks*) de la línea 0
+a la A; ajusta B a `2` y C, D, E y F a `1`. ¡Ahora solo ignora de la línea C
+a la F en la pantalla Phrase! #LSDJTips»</div>
 
 Esta es solo una forma de ajustar un *groove* a 3/4; aunque, por
 supuesto, hay más opciones. Demos un vistazo a un ejemplo de cómo podría
 ser utilizado.
 
+![ ](../media/furelise.mp4)
+
 De manera similar; puedes utilizar *grooves* para expresar tresillos.
-Usar el *groove* por defecto de 6/6 es útil; dado que seis es divisible
+Usar el *groove* por defecto de `6/6` es útil; dado que seis es divisible
 entre dos y tres respectivamente. Esto nos permite poner fácilmente tres
 notas (un tresillo de corcheas) en el espacio de dos corcheas. Ya que
 dos corcheas son iguales a veinticuatro *ticks*; necesitamos dividir
@@ -66,6 +66,8 @@ de la *phrase* para permitir que la siguiente comience en el tiempo uno.
 Esto es sencillo de realizar si se coloca un comando H00 para saltarnos
 la última línea de la *phrase* (la cual dura seis *ticks*).
 
+![ ](../media/triplet.mp4)
+
 Por último, y para terminar por ahora con los *tips*, veremos otro
 ejemplo de Hypnogram, con un simple, aunque efectivo, *delay* a dos
 canales. Utilizando dos *grooves* puedes fácilmente desplazar los
@@ -82,7 +84,6 @@ un poco de *finetune* a los canales Pulse para ayudar a engrosar un poco
 el sonido. Primero escucharás un canal Pulse solo, después escucharás el
 segundo canal añadido con un poco de *delay*.
 
-Esto concluye esta edición de *Intense Tech*. Espero que hayas
-encontrado valiosos estos *tips*, lo suficiente para que los incluyas en
-tus canciones. Como siempre, ¡hasta la próxima vez! Se despide, [DEFENSE
-MECHANISM](https://defensemech.com).
+![ ](../media/delay.mp4)
+
+------------------------------------------
