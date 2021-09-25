@@ -4,4 +4,4 @@ Mech](https://defensemech.com/intense-tech/) article series about LSDj technique
 to defensem3ch @t gmail d.t com if you're interested in contributing to the project!
 
 All Intense Tech articles are released under [CC By-NC-SA 
-4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) unless otherwise noted.
